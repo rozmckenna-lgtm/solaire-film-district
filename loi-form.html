@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Submit a Letter of Intent — Solaire Film District.">
+  <title>Submit a Letter of Intent — Solaire Film District</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <a href="#main-content" class="skip-nav">Skip to content</a>
+
+  <header class="site-header" role="banner">
+    <div class="container">
+      <a href="index.html" class="site-logo">Solaire Film District</a>
+      <nav class="site-nav" aria-label="Main navigation">
+        <ul>
+          <li><a href="index.html">Home / Accueil</a></li>
+          <li><a href="vision.html">Vision</a></li>
+          <li><a href="biography.html">Biography</a></li>
+          <li><a href="loi.html">LOI</a></li>
+          <li><a href="loi-form.html" aria-current="page">Submit / Soumettre</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+
+    <section class="page-hero page-hero--glow section">
+      <div class="container">
+        <h1>Submit a Letter of Intent</h1>
+        <hr class="hero-divider">
+        <div class="hero-subtitles">
+          <p class="subtitle" lang="en">
+            <span class="lang-label">EN</span><br>
+            Fill in the form below. All fields marked with an asterisk (<abbr title="required">*</abbr>) are required.
+          </p>
+          <p class="subtitle" lang="fr">
+            <span class="lang-label">FR</span><br>
+            Remplissez le formulaire ci-dessous. Tous les champs marques d'un asterisque (<abbr title="requis">*</abbr>) sont obligatoires.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container prose">
+
+        <form
+          action="https://formspree.io/f/xwvkjpaz"
+          method="POST"
+          aria-label="Letter of Intent form"
+        >
+          <!-- Formspree: redirect after submission -->
+          <input type="hidden" name="_next" value="https://solairefilmdistrict.fr/thank-you.html">
+
+          <!-- Formspree: custom email subject -->
+          <input type="hidden" name="_subject" value="Nouvelle lettre d'intention — Solaire Film District">
+
+          <!-- Honeypot anti-spam -->
+          <div class="form-honey" aria-hidden="true">
+            <label for="website">Do not fill this field</label>
+            <input type="text" id="website" name="_gotcha" tabindex="-1" autocomplete="off">
+          </div>
+
+          <!-- Section 1: Contact Information -->
+          <fieldset class="form-fieldset">
+            <legend>Contact Information / Informations de contact</legend>
+
+            <div class="form-group">
+              <label for="org-name">Organisation / Structure name * <span class="hint">Nom de l'organisme</span></label>
+              <input type="text" id="org-name" name="organisation" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-name">Contact name * <span class="hint">Nom et prenom du contact principal</span></label>
+              <input type="text" id="contact-name" name="contact_name" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-email">Email address * <span class="hint">Adresse e-mail</span></label>
+              <input type="email" id="contact-email" name="email" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-phone">Phone number <span class="hint">Numero de telephone</span></label>
+              <input type="tel" id="contact-phone" name="phone">
+            </div>
+
+            <div class="form-group">
+              <label for="contact-website">Website <span class="hint">Site web</span></label>
+              <input type="url" id="contact-website" name="website_url" placeholder="https://">
+            </div>
+          </fieldset>
+
+          <!-- Section 2: Project Description -->
+          <fieldset class="form-fieldset">
+            <legend>Project Description / Description du projet</legend>
+
+            <div class="form-group">
+              <label for="project-title">Project title * <span class="hint">Titre du projet</span></label>
+              <input type="text" id="project-title" name="project_title" required>
+            </div>
+
+            <div class="form-group">
+              <label for="project-type">Project type * <span class="hint">Type de projet</span></label>
+              <select id="project-type" name="project_type" required>
+                <option value="">— Select / Selectionnez —</option>
+                <option value="long-metrage">Feature film / Long metrage</option>
+                <option value="court-metrage">Short film / Court metrage</option>
+                <option value="documentaire">Documentary / Documentaire</option>
+                <option value="serie">Series / Serie</option>
+                <option value="clip-musical">Music video / Clip musical</option>
+                <option value="publicite">Advertising / Publicite</option>
+                <option value="autre">Other / Autre</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="project-synopsis">Synopsis / Project description *</label>
+              <span class="hint">Briefly describe your project (500 words max) / Decrivez brievement votre projet</span>
+              <textarea id="project-synopsis" name="synopsis" rows="6" required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="project-intent">Artistic intentions <span class="hint">Intentions artistiques</span></label>
+              <span class="hint">Aesthetic, narrative or thematic approach / Parti pris esthetique, narratif ou thematique</span>
+              <textarea id="project-intent" name="artistic_intent" rows="4"></textarea>
+            </div>
+          </fieldset>
+
+          <!-- Section 3: Timeline & Budget -->
+          <fieldset class="form-fieldset">
+            <legend>Timeline &amp; Budget / Calendrier et budget</legend>
+
+            <div class="form-group">
+              <label for="timeline-start">Proposed start date * <span class="hint">Date de debut envisagee</span></label>
+              <input type="date" id="timeline-start" name="timeline_start" required>
+            </div>
+
+            <div class="form-group">
+              <label for="timeline-end">Proposed end date <span class="hint">Date de fin envisagee</span></label>
+              <input type="date" id="timeline-end" name="timeline_end">
+            </div>
+
+            <div class="form-group">
+              <label for="shooting-days">Estimated shooting days <span class="hint">Jours de tournage estimes</span></label>
+              <input type="text" id="shooting-days" name="shooting_days" placeholder="e.g. 15">
+            </div>
+
+            <div class="form-group">
+              <label for="budget-range">Budget range * <span class="hint">Fourchette budgetaire</span></label>
+              <select id="budget-range" name="budget_range" required>
+                <option value="">— Select / Selectionnez —</option>
+                <option value="moins-10k">&lt; 10,000 &euro;</option>
+                <option value="10k-50k">10,000 &euro; – 50,000 &euro;</option>
+                <option value="50k-150k">50,000 &euro; – 150,000 &euro;</option>
+                <option value="150k-500k">150,000 &euro; – 500,000 &euro;</option>
+                <option value="500k-1m">500,000 &euro; – 1,000,000 &euro;</option>
+                <option value="plus-1m">&gt; 1,000,000 &euro;</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="funding-status">Funding status <span class="hint">Statut du financement</span></label>
+              <select id="funding-status" name="funding_status">
+                <option value="">— Select / Selectionnez —</option>
+                <option value="recherche">Seeking funding / En recherche</option>
+                <option value="partiel">Partially funded / Partiellement acquis</option>
+                <option value="acquis">Fully funded / Acquis</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <!-- Section 4: Territorial Needs -->
+          <fieldset class="form-fieldset">
+            <legend>Territorial Needs / Besoins territoriaux</legend>
+
+            <div class="form-group">
+              <label for="location-needs">Location / shooting needs <span class="hint">Besoins en lieux de tournage</span></label>
+              <span class="hint">Describe the types of locations required / Decrivez les types de decors recherches</span>
+              <textarea id="location-needs" name="location_needs" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="local-resources">Local resources needed <span class="hint">Ressources locales recherchees</span></label>
+              <span class="hint">Crew, actors, accommodation, logistics / Techniciens, comediens, hebergement, logistique</span>
+              <textarea id="local-resources" name="local_resources" rows="3"></textarea>
+            </div>
+          </fieldset>
+
+          <!-- Section 5: Additional -->
+          <fieldset class="form-fieldset">
+            <legend>Additional Information / Informations complementaires</legend>
+
+            <div class="form-group">
+              <label for="additional-info">Comments <span class="hint">Commentaires supplementaires</span></label>
+              <textarea id="additional-info" name="additional_info" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="referral">How did you hear about us? <span class="hint">Comment avez-vous entendu parler de nous ?</span></label>
+              <select id="referral" name="referral_source">
+                <option value="">— Select / Selectionnez —</option>
+                <option value="bouche-a-oreille">Word of mouth / Bouche-a-oreille</option>
+                <option value="reseaux-sociaux">Social media / Reseaux sociaux</option>
+                <option value="institution">Institution / Collectivite</option>
+                <option value="evenement">Event / Festival</option>
+                <option value="presse">Press / Presse</option>
+                <option value="autre">Other / Autre</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <!-- Submit -->
+          <div class="cta-section">
+            <button type="submit" class="btn btn-primary">
+              Submit Letter of Intent / Envoyer la lettre d'intention
+            </button>
+          </div>
+
+        </form>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <p>&copy; 2026 Solaire Film District. All rights reserved / Tous droits reserves.</p>
+      <p>24 Avenue du Grand Chemin, 34230 Belarga, Occitanie</p>
+      <p><a href="mailto:contact@solairefilmdistrict.fr">contact@solairefilmdistrict.fr</a></p>
+    </div>
+  </footer>
+
+</body>
+</html>
