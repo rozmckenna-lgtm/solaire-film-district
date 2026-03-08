@@ -1,0 +1,20 @@
+# Reference documents (not part of website)
+*.odt
+*.pdf
+*.zip
+
+# Old versions
+v2/
+studio solaire/
+Studio solaire web.v1/
+
+# Setup reference files
+DOMAINE-A-CONFIGURER.txt
+GITHUB-SETUP-REFERENCE.txt
+LAUNCH-CHECKLIST-v3.md
+
+# Original/unused images
+logo-solaire-original.jpeg
+occitanie gold.jpeg
+WhatsApp Image 2026-02-22 at 14.28.29.jpeg
+facebook Roz Image.jpg
