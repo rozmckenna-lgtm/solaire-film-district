@@ -415,10 +415,10 @@ a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
   z-index: 1;
 }
 
-.loi-hero .page-logo {
-  position: relative;
-  z-index: 2;
+.page-logo {
   padding-top: var(--space-2xl);
+  padding-bottom: var(--space-lg);
+  background-color: var(--color-bg);
 }
 
 .loi-hero h1 {
