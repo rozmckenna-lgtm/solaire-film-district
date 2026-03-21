@@ -186,13 +186,15 @@ a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
   padding: var(--space-lg) 0;
 }
 
-.hero-logo {
-  max-width: 500px;
+.hero-logo,
+.page-logo {
+  max-width: 700px;
   margin: 0 auto;
   padding: 0 var(--gutter);
 }
 
-.hero-logo img {
+.hero-logo img,
+.page-logo img {
   width: 100%;
   height: auto;
   display: block;
@@ -204,14 +206,16 @@ a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 }
 
 @media (min-width: 40rem) {
-  .hero-logo {
-    max-width: 550px;
+  .hero-logo,
+  .page-logo {
+    max-width: 750px;
   }
 }
 
 @media (min-width: 64rem) {
-  .hero-logo {
-    max-width: 600px;
+  .hero-logo,
+  .page-logo {
+    max-width: 850px;
   }
 }
 
@@ -409,6 +413,10 @@ a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
 .loi-hero > .pillar {
   position: relative;
   z-index: 1;
+}
+
+.loi-hero .page-logo {
+  padding-top: var(--space-2xl);
 }
 
 .loi-hero h1 {
