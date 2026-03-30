@@ -745,20 +745,10 @@ a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
   background-repeat: no-repeat;
 }
 
-.hero::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.45);
-}
-
-.hero > * {
-  position: relative;
-  z-index: 1;
-}
 @media (max-width: 768px) {
   .hero {
-    background-position: 15% 0%;
-    background-size: 170%;
+    background-image: url('../Hero-bg.jpg.PNG');
+    background-size: 260%;
+    background-position: 0% 0%;
   }
 }
