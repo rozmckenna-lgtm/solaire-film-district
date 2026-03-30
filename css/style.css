@@ -736,3 +736,23 @@ a:focus-visible { outline: 2px solid var(--color-focus); outline-offset: 2px; }
   .loi-hero h1 { font-size: var(--text-hero); }
   .thankyou-hero h1 { font-size: var(--text-hero); }
 }
+.hero {
+  position: relative;
+  min-height: 100vh;
+  background-image: url('../Hero-bg.jpg.PNG');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.45);
+}
+
+.hero > * {
+  position: relative;
+  z-index: 1;
+}
