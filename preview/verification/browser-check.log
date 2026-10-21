@@ -1,3 +1,5 @@
+PASS desktop five-PDF-content-signatures
+PASS desktop internal-navigation-targets 14
 PASS desktop index.html
 PASS desktop creators.html
 PASS desktop decision-makers.html
@@ -10,6 +12,8 @@ PASS desktop john-malkovich.html
 PASS desktop realistic-film-budget.html
 PASS desktop screenplay-baby.html
 PASS desktop thank-you.html
+PASS mobile five-PDF-content-signatures
+PASS mobile internal-navigation-targets 14
 PASS mobile index.html
 PASS mobile creators.html
 PASS mobile decision-makers.html
