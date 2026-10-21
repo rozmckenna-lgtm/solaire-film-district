@@ -53,13 +53,24 @@
   async function translate(source) {
     const key = pageLanguage + ":" + language + ":" + source;
     if (!cache.has(key)) {
-      cache.set(key, schedule(() => fetch(API, {
-      method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ contentId: "auto", sourceText: source, sourceLanguage: pageLanguage, targetLanguage: language })
-    }).then(async r => {
-      const body = await r.json().catch(() => ({}));
-      return r.ok && (body.status === "translated" || body.status === "cached") && typeof body.text === "string" ? body.text : null;
-    }).catch(() => null)));
+      cache.set(key, schedule(async () => {
+        // A stalled translation service must not block both request slots forever.
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 12000);
+        try {
+          const response = await fetch(API, {
+            method: "POST", headers: { "content-type": "application/json" },
+            body: JSON.stringify({ contentId: "auto", sourceText: source, sourceLanguage: pageLanguage, targetLanguage: language }),
+            signal: controller.signal
+          });
+          const body = await response.json().catch(() => ({}));
+          return response.ok && (body.status === "translated" || body.status === "cached") && typeof body.text === "string" ? body.text : null;
+        } catch (_) {
+          return null; // Leave original English visible and allow a later retry.
+        } finally {
+          clearTimeout(timeout);
+        }
+      }));
     }
     const result = await cache.get(key);
     // A transient network/CORS error must not poison the page cache permanently.
