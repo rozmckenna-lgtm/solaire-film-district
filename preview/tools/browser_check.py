@@ -18,13 +18,17 @@ with sync_playwright() as pw:
                 payload = route.request.post_data_json or {}
                 text = payload.get("sourceText", "")
                 route.fulfill(status=200, content_type="application/json", headers={"access-control-allow-origin": "*"}, body=json.dumps({"status":"translated","text":"FR_TEST: " + text}))
-            page.route("**/functions/v1/translate-website", mock_translation)
+            page.route("**/functions/v1/translate-website-staging", mock_translation)
             response = page.goto(BASE + page_name, wait_until="domcontentloaded", timeout=30000)
             assert response and response.status == 200, f"{device} {page_name}: HTTP {response.status if response else 'no response'}"
             page.wait_for_function("document.body.innerText.includes('FR_TEST:')", timeout=30000)
             page.wait_for_function("document.title.startsWith('FR_TEST:')", timeout=30000)
             assert page.locator("script[src=\'automatic-translation.js\']").count() == 1, f"{device} {page_name}: translation script missing or duplicated"
             assert page.locator("img[src=\'../logo-solaire.jpeg\']").evaluate_all("(images) => images.every(img => img.complete && img.naturalWidth > 0)") if page.locator("img[src=\'../logo-solaire.jpeg\']").count() else True, f"{device} {page_name}: Solaire logo not loaded"
+            if page_name == "loi.html":
+                redirect = page.locator('form[action="https://formspree.io/f/xwvkjpaz"] input[name="_next"]').input_value()
+                assert redirect == BASE + "thank-you.html", f"{device}: LOI confirmation redirect wrong: {redirect}"
+                print("PASS", device, "LOI-same-origin-confirmation-redirect", flush=True)
             if page_name == "index.html":
                 hero = page.locator(".hero")
                 assert hero.count() == 1, f"{device}: cinematic globe hero missing"
