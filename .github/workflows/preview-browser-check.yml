@@ -1,0 +1,31 @@
+name: Cinematic staging browser verification
+on:
+  push:
+    paths:
+      - 'preview/**'
+      - '.github/workflows/preview-browser-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install playwright
+      - run: python -m playwright install --with-deps chromium
+      - name: Serve repository locally
+        run: python -m http.server 8765 --bind 127.0.0.1 &
+      - name: Browser render and free mocked translation checks
+        run: python preview/tools/browser_check.py
+      - name: Preserve screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cinematic-browser-evidence
+          path: browser-evidence/
+          if-no-files-found: ignore
