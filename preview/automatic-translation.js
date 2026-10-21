@@ -66,12 +66,42 @@
       completed.add(node);
     } finally { pending.delete(node); }
   }
+  // Translate visitor-facing attributes as well as visible text.
+  // Keep addresses, form field names, URLs, values and user input untouched.
+  const attributes = ["placeholder", "aria-label", "title", "alt"];
+  const attributeDone = new WeakMap();
+  async function processAttributes(element) {
+    if (element.closest(protectedSelector + ",[hidden]")) return;
+    let seen = attributeDone.get(element);
+    if (!seen) { seen = new Set(); attributeDone.set(element, seen); }
+    for (const attribute of attributes) {
+      if (seen.has(attribute) || !element.hasAttribute(attribute)) continue;
+      const original = element.getAttribute(attribute);
+      if (!original || original.trim().length < 2 || original.length > 800) continue;
+      seen.add(attribute);
+      const translated = await translate(original);
+      if (translated && element.isConnected && element.getAttribute(attribute) === original)
+        element.setAttribute(attribute, translated);
+    }
+  }
+  async function translateDocumentMetadata() {
+    const originalTitle = document.title;
+    if (originalTitle) {
+      const translated = await translate(originalTitle);
+      if (translated && document.title === originalTitle) document.title = translated;
+    }
+  }
+  if (language === "ar" || language === "he" || language === "fa" || language === "ur") {
+    document.documentElement.dir = "rtl";
+  }
+  void translateDocumentMetadata();
   let queued = false;
   function scan() {
     if (queued) return; queued = true;
     queueMicrotask(() => {
       queued = false;
       for (const node of textNodes()) if (!completed.has(node)) void process(node);
+      for (const element of document.querySelectorAll("[placeholder],[aria-label],[title],[alt]")) void processAttributes(element);
     });
   }
   new MutationObserver(scan).observe(document.documentElement, { childList: true, subtree: true });
