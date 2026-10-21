@@ -2,7 +2,7 @@
   "purpose": "English-only Gamma-to-GitHub source mapping for future sync. This manifest does not itself enable automatic updates.",
   "verifiedOn": "2026-10-21",
   "syncEnabled": false,
-  "notes": "Gamma full-text search confirms all five mapped article IDs are English-language article documents; three have older English duplicates. A previous read_gamma response mismatch is not proof that the documents themselves are French. Keep sync disabled until authenticated automated retrieval and safe update verification.",
+  "notes": "Gamma full-text search identifies English originals. Gamma read_gamma returns unrelated documents for three IDs, so sync stays disabled. Alternative authenticated Gamma export was tested on 1iez2py11pb8yrl: completed PDF export titled Screenwriting-for-Distracted-Writers.pdf (export JRK-3tkK_Hmko8Lws2-qj); Gamma resolved export to internal ID g_553npd1r2inv7x9. PDF contents could not be inspected from this runtime (download URL inaccessible), so this is not proof of content correctness. Do not overwrite article HTML until validated content and automated retrieval are available.",
   "articles": [
     {
       "localPath": "distracted-audience.html",
