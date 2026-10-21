@@ -4,6 +4,7 @@ PASS desktop index.html
 PASS desktop creators.html
 PASS desktop decision-makers.html
 PASS desktop pitchup.html
+PASS desktop LOI-same-origin-confirmation-redirect
 PASS desktop loi.html
 PASS desktop creator-centre.html
 PASS desktop distracted-audience.html
@@ -18,6 +19,7 @@ PASS mobile index.html
 PASS mobile creators.html
 PASS mobile decision-makers.html
 PASS mobile pitchup.html
+PASS mobile LOI-same-origin-confirmation-redirect
 PASS mobile loi.html
 PASS mobile creator-centre.html
 PASS mobile distracted-audience.html
