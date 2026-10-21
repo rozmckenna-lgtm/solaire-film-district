@@ -20,7 +20,7 @@ jobs:
           import json, time, urllib.request, urllib.error
           from pathlib import Path
           base="https://rozmckenna-lgtm.github.io/solaire-film-district/preview/"
-          targets=["index.html","cinematic.css","automatic-translation.js","creator-centre.html","john-malkovich.html"]
+          targets=["index.html","cinematic.css","automatic-translation.js","creator-centre.html","john-malkovich.html","thank-you.html","loi.html"]
           report={"base":base,"results":[],"all_ok":False}
           for target in targets:
               result={"path":target}
