@@ -32,4 +32,25 @@ class GammaSyncGuardTests(unittest.TestCase):
     def test_path_traversal_rejected(self):
         self.manifest["articles"][0]["localPath"]="../index.html"
         self.assertEqual(self.run_guard()[0]["status"],"SKIPPED_UNVERIFIED")
+    def test_valid_english_source_creates_only_dry_run_fragment(self):
+        title="Does a Story Have to Be Fast to Be Compelling?"
+        paragraphs="".join("<p>English source paragraph about screenplay structure and narrative pacing.</p>" for _ in range(12))
+        source=f"Title: {title}\\n<div><section><h1>{title}</h1>{paragraphs}</section></div>"
+        (self.root/"in"/"annfffa1kk0wj44.txt").write_text(source,encoding="utf-8")
+        result=self.run_guard()
+        self.assertEqual(result[0]["status"],"DRY_RUN_VALIDATED")
+        target=self.root/"out"/"does-a-story-have-to-be-fast.html"
+        self.assertTrue(target.is_file())
+        self.assertIn('lang="en"',target.read_text())
+        self.assertFalse((self.root/"does-a-story-have-to-be-fast.html").exists())
+        self.assertEqual(result[1]["status"],"SKIPPED_UNVERIFIED")
+    def test_dry_run_refuses_overwrite(self):
+        title="Does a Story Have to Be Fast to Be Compelling?"
+        paragraphs="".join("<p>English source paragraph about screenplay structure and narrative pacing.</p>" for _ in range(12))
+        (self.root/"in"/"annfffa1kk0wj44.txt").write_text(f"Title: {title}\\n<div><section><h1>{title}</h1>{paragraphs}</section></div>")
+        first=self.run_guard()
+        self.assertEqual(first[0]["status"],"DRY_RUN_VALIDATED")
+        second=self.run_guard()
+        self.assertEqual(second[0]["status"],"REJECTED")
+        self.assertIn("overwrite",second[0]["reason"])
 if __name__=="__main__": unittest.main()
