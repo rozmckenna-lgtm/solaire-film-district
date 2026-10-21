@@ -34,5 +34,11 @@
       "gammaUrl": "https://gamma.app/docs/First-Screenplay-Writing-5zupllwsm8jzxw5",
       "status": "candidate: newer English duplicate; canonical not established"
     }
-  ]
+  ],
+  "retrievalAssessment": {
+    "authenticatedGammaConnector": "Verified read_gamma successfully retrieves full source content for the 'Does a Story Have to Be Fast' document.",
+    "publicHTML": "Gamma returned HTTP 403 in connected sandbox; direct unauthenticated scraping is not viable.",
+    "automatedAPI": "Gamma documents authenticated REST read/export endpoints, but no scheduled API credential or GitHub Actions secret has been verified. Do not activate synchronization until authenticated retrieval, content conversion and safe commit validation are tested.",
+    "translation": "All five existing local English HTML pages load js/automatic-translation.js; no cross-origin iframe translation is assumed."
+  }
 }
