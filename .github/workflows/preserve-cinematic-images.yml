@@ -1,0 +1,75 @@
+name: Preserve approved cinematic images in staging
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/preserve-cinematic-images.yml'
+permissions:
+  contents: write
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Download unchanged approved image files
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.request import Request, urlopen
+          import hashlib, struct
+          root = "https://media.base44.com/images/public/6ad768462ea55ab133e15a41/"
+          images = {
+              "globe.png": "fd49a2c7f_generated_image.png",
+              "pitchup-card.png": "4235374bf_generated_image.png",
+              "district-card.png": "3516e1b82_generated_image.png",
+          }
+          target = Path("preview/assets")
+          target.mkdir(parents=True, exist_ok=True)
+          for name, source in images.items():
+              request = Request(root + source, headers={"User-Agent": "SolaireFilmDistrict-asset-preservation/1.0"})
+              with urlopen(request, timeout=30) as response:
+                  data = response.read(12_000_001)
+                  content_type = response.headers.get("Content-Type", "")
+              if len(data) > 12_000_000 or not data.startswith(b"\x89PNG\r\n\x1a\n") or "image/png" not in content_type:
+                  raise SystemExit("STOP: image fetch invalid for " + name)
+              width, height = struct.unpack(">II", data[16:24])
+              if not (width >= 400 and height >= 250):
+                  raise SystemExit("STOP: suspicious image dimensions for " + name)
+              (target / name).write_bytes(data)
+              print("VERIFIED " + name + " " + str(width) + "x" + str(height) + " sha256=" + hashlib.sha256(data).hexdigest())
+          PY
+      - name: Switch only cinematic preview image references to preserved originals
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          base = "https://media.base44.com/images/public/6ad768462ea55ab133e15a41/"
+          changes = [
+              ("preview/index.html", {
+                  base + "fd49a2c7f_generated_image.png": "assets/globe.png",
+                  base + "4235374bf_generated_image.png": "assets/pitchup-card.png",
+                  base + "3516e1b82_generated_image.png": "assets/district-card.png",
+              }),
+              ("preview/cinematic.css", {
+                  base + "fd49a2c7f_generated_image.png": "assets/globe.png",
+              }),
+          ]
+          for file, replacements in changes:
+              path = Path(file)
+              data = path.read_text()
+              for old, new in replacements.items():
+                  if old not in data and new not in data:
+                      raise SystemExit("STOP: approved source URL missing in " + file)
+                  data = data.replace(old, new)
+              path.write_text(data)
+          PY
+      - name: Commit only unchanged image bytes and preview references
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add preview/assets/globe.png preview/assets/pitchup-card.png preview/assets/district-card.png preview/index.html preview/cinematic.css
+          if ! git diff --cached --quiet; then
+            git commit -m "Self-host unchanged approved cinematic images in preview"
+            git push
+          fi
