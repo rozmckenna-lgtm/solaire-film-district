@@ -30,4 +30,11 @@
     <priority>0.3</priority>
     <changefreq>yearly</changefreq>
   </url>
+  <url><loc>https://solairefilmdistrict.fr/creator-centre.html</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://solairefilmdistrict.fr/distracted-audience.html</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://solairefilmdistrict.fr/john-malkovich.html</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://solairefilmdistrict.fr/screenplay-baby.html</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://solairefilmdistrict.fr/distracted-audience-fr.html</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://solairefilmdistrict.fr/john-malkovich-fr.html</loc><changefreq>monthly</changefreq></url>
+  <url><loc>https://solairefilmdistrict.fr/screenplay-baby-fr.html</loc><changefreq>monthly</changefreq></url>
 </urlset>
