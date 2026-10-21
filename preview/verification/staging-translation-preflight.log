@@ -1,0 +1,6 @@
+endpoint=translate-website-staging
+status=204
+allowed_origin=https://rozmckenna-lgtm.github.io
+allowed_methods=POST,OPTIONS
+allowed_headers=content-type
+PASS: browser preflight accepted; no translation POST performed
