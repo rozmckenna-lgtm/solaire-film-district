@@ -37,8 +37,8 @@ def prepare(name, existing, fragment):
         return updated, ""
     # Split minified article HTML into structural elements for readable diffs.
     def readable_lines(markup):
-        split = re.sub(r"(?=<(?:h[1-6]|p|hr|spacer|ul|ol|li|blockquote)\\b)", "\\n", markup)
-        return [line + "\\n" for line in split.strip().splitlines()]
+        split = re.sub(r"(?=<(?:h[1-6]|p|hr|spacer|ul|ol|li|blockquote)\b)", "\n", markup)
+        return [line + "\n" for line in split.strip().splitlines()]
     diff = "".join(difflib.unified_diff(readable_lines(original), readable_lines(new_body), fromfile="staging-existing", tofile="authenticated-gamma", n=2))
     return updated, diff
 
