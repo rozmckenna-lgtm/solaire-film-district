@@ -27,6 +27,12 @@
   const originals = new WeakMap(), cache = new Map(), pending = new Set(), completed = new WeakSet();
   const MAX_CONCURRENT_REQUESTS = 2;
   const queue = []; let active = 0;
+  // Decode Google Translate HTML entities as text, never as markup.
+  function decodeTranslatedText(value) {
+    const textarea = document.createElement("textarea");
+    textarea.innerHTML = value;
+    return textarea.value;
+  }
   const textNodes = () => {
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     const nodes = []; let node;
@@ -64,7 +70,7 @@
             signal: controller.signal
           });
           const body = await response.json().catch(() => ({}));
-          return response.ok && (body.status === "translated" || body.status === "cached") && typeof body.text === "string" ? body.text : null;
+          return response.ok && (body.status === "translated" || body.status === "cached") && typeof body.text === "string" ? decodeTranslatedText(body.text) : null;
         } catch (_) {
           return null; // Leave original English visible and allow a later retry.
         } finally {
