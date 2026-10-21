@@ -12,7 +12,10 @@
   let translatedCount = 0;
   function markTranslated() {
     translatedCount++;
-    if (translatedCount === 1) document.documentElement.lang = language;
+    if (translatedCount === 1) {
+      document.documentElement.lang = language;
+      if (["ar", "he", "fa", "ur"].includes(language)) document.documentElement.dir = "rtl";
+    }
   }
   if (!/^[a-z]{2,3}$/.test(language)) return;
   // Staging uses English as the sole canonical source. Never reveal legacy French duplicates.
@@ -103,9 +106,6 @@
       const translated = await translate(originalTitle);
       if (translated && document.title === originalTitle) document.title = translated;
     }
-  }
-  if (language === "ar" || language === "he" || language === "fa" || language === "ur") {
-    document.documentElement.dir = "rtl";
   }
   void translateDocumentMetadata();
   let queued = false;
