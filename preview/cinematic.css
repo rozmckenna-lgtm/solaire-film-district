@@ -61,3 +61,6 @@ body{background:#130b12 url('https://media.base44.com/images/public/6ad768462ea5
 .feature .eyebrow{max-width:50%}
 .actions{max-width:60%}
 @media(max-width:720px){body{background-attachment:scroll;background-size:auto 1050px;background-position:center top 70px}.hero{min-height:395px}.cards{grid-template-columns:1fr}.feature{min-height:295px}.feature img{width:100%}.feature-copy>p:not(.eyebrow),.feature .eyebrow{max-width:77%}.actions{max-width:90%}}
+
+/* Mobile header: keep primary navigation ahead of the account action. */
+@media(max-width:720px){.brand{order:1}.nav{order:2}.account{order:3}}
