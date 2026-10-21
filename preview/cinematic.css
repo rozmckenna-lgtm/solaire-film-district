@@ -196,3 +196,31 @@ body{background:#0d0d17}
 .sidebar-brand .gold-words small{font-size:8px}
 .footer .gold-words strong{font-size:30px}
 @media(max-width:560px){.topbar .gold-sun{font-size:32px}.topbar .gold-words strong{font-size:22px}.topbar .gold-words small{font-size:7px}}
+
+/* PitchUp visual parity, approved reference 22 October: black sidebar,
+   gold separators, warm charcoal-plum cards, restrained serif headings. */
+:root{--gold:#c9a76d;--cream:#eae3df;--pitch-panel:#302730;--pitch-panel-dark:#211c24}
+body{color:var(--cream);font-family:Inter,Arial,sans-serif;font-weight:400}
+.district-sidebar{background:#0c0c10!important;border-right:1px solid #b79a635c;box-shadow:none}
+.sidebar-brand{background:#0c0c10!important;border-bottom:1px solid #b79a635c;padding:27px 18px}
+.sidebar-nav{padding:23px 9px;gap:7px}
+.sidebar-nav a{color:#c9c6c6;font-size:13px;letter-spacing:.015em;border-left:2px solid transparent;padding:12px 15px}
+.sidebar-nav a.active{background:#191921;border-left:2px solid var(--gold);color:#d4b47a}
+.sidebar-nav a:hover,.sidebar-nav a:focus-visible{background:#1b1b22;color:#e5c58d}
+.sidebar-account{background:#191921;border:1px solid #b79a635c;color:#d6b57b}
+.sidebar-brand .gold-logo{gap:10px}
+.sidebar-brand .gold-sun{color:#c9a76d}
+.sidebar-brand .gold-words strong{color:#d5b77d;font-weight:400;letter-spacing:.13em}
+.sidebar-brand .gold-words small{color:#c9a76d}
+.district-content .topbar{background:#0c0c10;border-bottom:1px solid #b79a6340}
+.district-content .feature{background:#302730;border:1px solid #a38b657d;border-radius:16px;box-shadow:0 10px 30px #0004}
+.district-content .feature-copy{background:linear-gradient(90deg,#352b36f7 0%,#302730e8 43%,#30273070 72%,transparent 100%)}
+.district-content .feature h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:400;color:#eee4de}
+.district-content .feature-copy>p:not(.eyebrow){color:#d6ced0}
+.district-about{background:linear-gradient(115deg,#302730,#1b1820);border-top-color:#b79a6350}
+.reading{background:#111016}
+.reading-list a,.resource-list a{background:#29232c;border:1px solid #9e886a75;border-radius:12px;color:#eae3df}
+.reading-list a:hover,.resource-list a:hover{background:#382e3b}
+.resource-library{border-top-color:#b79a6345}
+.district-about-copy p,.reading-inner>p:not(.eyebrow),.resource-library>p{color:#d4cbd0}
+@media(max-width:1100px){.sidebar-toggle{background:#111016f2;border-color:#c9a76d}}
