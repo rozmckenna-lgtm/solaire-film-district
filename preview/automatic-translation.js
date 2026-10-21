@@ -1,9 +1,9 @@
 /* Solaire Film District — automatic browser-language translation (static GitHub Pages).
-   Uses the secured production Supabase Edge Function endpoint.
+   Uses the isolated staging Supabase Edge Function endpoint; production is unchanged.
    No language picker, login, or third-party scripts. */
 (() => {
   "use strict";
-  const API = "https://titeccsfyanjqmzofjrr.supabase.co/functions/v1/translate-website";
+  const API = "https://titeccsfyanjqmzofjrr.supabase.co/functions/v1/translate-website-staging";
   const language = (navigator.languages?.[0] || navigator.language || "en").split("-")[0].toLowerCase();
   if (!/^[a-z]{2,3}$/.test(language)) return;
   // Staging uses English as the sole canonical source. Never reveal legacy French duplicates.
