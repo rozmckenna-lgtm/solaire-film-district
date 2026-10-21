@@ -1,9 +1,9 @@
 /* Load the same cinematic typefaces as the approved homepage across all interior pages. */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
 /* Cinematic interior staging: English originals only, one reading column. */
-:root{--color-bg:#130c11;--color-bg-alt:#211018;--color-surface:#2d1721;--color-text:#eee3cd;--color-text-muted:#cdbfb2;--color-gold:#d9bb7d;--color-gold-hover:#f2d9a1;--color-gold-dim:#b18e56;--color-white:#eee3cd;--color-border:#78503f;--color-focus:#d9bb7d;--font-heading:'Cormorant Garamond',Georgia,serif;--font-body:Inter,Arial,sans-serif}
-body{background:linear-gradient(145deg,#180c13,#28111d 50%,#110b11);color:var(--color-text)}
-.site-header{background:#130c11!important;border-bottom:1px solid #b8955b66}
+:root{--color-bg:#0a0a0e;--color-bg-alt:#503A59;--color-surface:#503A59;--color-text:#eee3cd;--color-text-muted:#cdbfb2;--color-gold:#d9bb7d;--color-gold-hover:#f2d9a1;--color-gold-dim:#b18e56;--color-white:#eee3cd;--color-border:#78503f;--color-focus:#d9bb7d;--font-heading:'Cormorant Garamond',Georgia,serif;--font-body:Inter,Arial,sans-serif}
+body{background:#0a0a0e;color:var(--color-text)}
+.site-header{background:#0a0a0e!important;border-bottom:1px solid #b8955b66}
 .site-header .nav-item{color:#eee3cd}
 .site-header .nav-item:hover,.site-header .nav-item:focus-visible{color:#d9bb7d}
 .bilingual{display:block!important;max-width:860px;margin-inline:auto}
@@ -12,7 +12,7 @@ body{background:linear-gradient(145deg,#180c13,#28111d 50%,#110b11);color:var(--
 main{max-width:1200px;margin-inline:auto}
 h1,h2,h3{color:#eee3cd}
 a:focus-visible{outline:2px solid #d9bb7d}
-footer{background:#130c11;border-top:1px solid #b8955b55}
+footer{background:#0a0a0e;border-top:1px solid #b8955b55}
 @media(max-width:720px){main{max-width:100%}.bilingual{width:100%}.site-header .container{flex-wrap:wrap;gap:10px}}
 
 /* Preserve the approved cinematic palette on narrow screens without clipping navigation. */
@@ -22,3 +22,12 @@ footer{background:#130c11;border-top:1px solid #b8955b55}
 img,video,iframe{max-width:100%;height:auto}
 .content-section,.loi-hero{overflow-wrap:break-word}
 @media(max-width:720px){.site-header .container{justify-content:flex-start;padding-inline:16px}.site-header .nav-item{font-size:.85rem}.pillar{padding-inline:16px}.hero-intro-en,.bilingual-en{width:100%}}
+
+/* User-approved PitchUp-inspired website system: black page chrome, gold rules,
+   soft aubergine #503A59 panels, light copy, identical serif headings. */
+:root{--soft-aubergine:#503A59;--color-surface:#503A59;--color-bg:#0a0a0e;--color-bg-alt:#503A59}
+body{background:#0a0a0e;color:#eee3cd;font-family:Inter,Arial,sans-serif}
+h1,h2,h3,.pillar h2,.content-section h2{font-family:'Cormorant Garamond',Georgia,serif}
+.pillar,.content-section,.loi-hero,.article-card,.resource-card{border-color:#b8955b55}
+.pillar,.article-card,.resource-card{background:#503A59}
+.site-header,footer{background:#0a0a0e!important}
