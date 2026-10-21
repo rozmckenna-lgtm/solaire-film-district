@@ -1,0 +1,39 @@
+name: Preview guarded Gamma staging article updates
+on:
+  push:
+    paths:
+      - 'preview/tools/staging_gamma_update.py'
+      - 'preview/verification/gamma-dry-run/**'
+      - '.github/workflows/staging-gamma-update-preview.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  stage-diffs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Generate isolated staged page and diff, never change preview HTML
+        shell: bash
+        run: |
+          mkdir -p preview/verification/gamma-update-review
+          set +e
+          for name in does-a-story-have-to-be-fast realistic-film-budget; do
+            python preview/tools/staging_gamma_update.py \
+              --page "preview/$name.html" \
+              --fragment "preview/verification/gamma-dry-run/$name.html" \
+              --out "preview/verification/gamma-update-review/$name.html" \
+              --diff "preview/verification/gamma-update-review/$name.diff" || exit 1
+          done > preview/verification/gamma-update-review/report.log 2>&1
+          status=$?
+          cat preview/verification/gamma-update-review/report.log
+          exit "$status"
+      - name: Retain review evidence
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview/verification/gamma-update-review
+          git diff --cached --quiet || (git commit -m 'Record staging Gamma update diff review [skip ci]' && git push)
