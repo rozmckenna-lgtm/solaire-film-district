@@ -23,6 +23,9 @@ with sync_playwright() as pw:
             assert response and response.status == 200, f"{device} {page_name}: HTTP {response.status if response else 'no response'}"
             page.wait_for_function("document.body.innerText.includes('FR_TEST:')", timeout=30000)
             page.wait_for_function("document.title.startsWith('FR_TEST:')", timeout=30000)
+            if page_name == "index.html":
+                page.wait_for_function("document.querySelector('meta[name=description]')?.content.startsWith('FR_TEST:')", timeout=30000)
+                print("PASS", device, "translated-description-metadata", flush=True)
             assert page.locator("script[src=\'automatic-translation.js\']").count() == 1, f"{device} {page_name}: translation script missing or duplicated"
             assert page.locator("img[src=\'../logo-solaire.jpeg\']").evaluate_all("(images) => images.every(img => img.complete && img.naturalWidth > 0)") if page.locator("img[src=\'../logo-solaire.jpeg\']").count() else True, f"{device} {page_name}: Solaire logo not loaded"
             if page_name == "loi.html":
