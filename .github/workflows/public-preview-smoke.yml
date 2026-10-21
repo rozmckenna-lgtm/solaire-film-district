@@ -1,0 +1,57 @@
+name: Verify public cinematic GitHub Pages preview
+on:
+  push:
+    paths:
+      - '.github/workflows/public-preview-smoke.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  public-preview:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test public GitHub Pages cinematic URL
+        shell: bash
+        run: |
+          mkdir -p preview/verification
+          python - <<'PY'
+          import json, time, urllib.request, urllib.error
+          from pathlib import Path
+          base="https://rozmckenna-lgtm.github.io/solaire-film-district/preview/"
+          targets=["index.html","cinematic.css","automatic-translation.js","creator-centre.html","john-malkovich.html"]
+          report={"base":base,"results":[],"all_ok":False}
+          for target in targets:
+              result={"path":target}
+              for attempt in range(4):
+                  try:
+                      req=urllib.request.Request(base+target,headers={"User-Agent":"SolairePreviewVerifier/1.0"})
+                      with urllib.request.urlopen(req,timeout=15) as res:
+                          body=res.read()
+                          result.update({"status":res.status,"url":res.url,"content_type":res.headers.get("Content-Type"),"bytes":len(body)})
+                          if target=="index.html":
+                              html=body.decode("utf-8","replace")
+                              result["cinematic_html"]=all(x in html for x in ("cinematic.css","automatic-translation.js"))
+                              result["gamma_error"]="Looks like this part of the Gamma site" in html
+                          break
+                  except Exception as exc:
+                      result["error"]=str(exc)[:240]
+                      if attempt<3: time.sleep(15)
+              report["results"].append(result)
+          report["all_ok"]=all(r.get("status")==200 and (r.get("cinematic_html",True)) and not r.get("gamma_error",False) for r in report["results"])
+          Path("preview/verification/public-preview-status.json").write_text(json.dumps(report,indent=2)+"\n")
+          print(json.dumps(report,indent=2))
+          PY
+      - name: Publish public test evidence
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p preview/verification
+          if [ ! -f preview/verification/public-preview-status.json ]; then
+            echo '{"all_ok":false,"error":"Public preview check did not execute"}' > preview/verification/public-preview-status.json
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview/verification/public-preview-status.json
+          git diff --cached --quiet || (git commit -m 'Record public staging HTTP verification [skip ci]' && git push)
