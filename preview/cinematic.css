@@ -48,3 +48,16 @@ body{background:#170a10}
 .actions a{padding:10px 13px;font-size:10px;background:#1e1019a8}
 @media(max-width:1080px){.hero{min-height:410px}.feature{min-height:300px}.feature img{width:70%}.feature-copy>p:not(.eyebrow){max-width:64%}}
 @media(max-width:720px){.hero{min-height:435px}.hero-inner{padding:55px 0 35px}.hero h1{font-size:clamp(45px,11vw,69px)}.explore{padding:30px 16px 65px}.cards{grid-template-columns:1fr;gap:16px}.feature{min-height:300px}.feature img{width:100%;object-position:65% center}.feature::before{background:linear-gradient(90deg,#24121ff7 0%,#291522e6 51%,#29152270 100%)}.feature-copy{padding:23px 20px}.feature-copy>p:not(.eyebrow),.feature .eyebrow{max-width:75%}.actions{max-width:85%}.feature h2{font-size:30px}}
+
+
+/* Reference parity: the illuminated globe continues behind the English-only project cards. */
+body{background:#130b12 url('https://media.base44.com/images/public/6ad768462ea55ab133e15a41/fd49a2c7f_generated_image.png') center top 85px / cover fixed no-repeat}
+.hero{background:linear-gradient(90deg,rgba(12,7,14,.87),rgba(12,7,14,.40) 60%,rgba(12,7,14,.07)),linear-gradient(0deg,rgba(12,7,14,.03),transparent 40%);min-height:370px}
+.explore{background:linear-gradient(180deg,rgba(20,8,16,.05),rgba(20,8,16,.15) 75%,rgba(20,8,16,.58));padding-top:0}
+.cards{grid-template-columns:1fr;max-width:1440px;gap:14px}
+.feature{min-height:240px}
+.feature img{width:50%}
+.feature-copy>p:not(.eyebrow){max-width:49%}
+.feature .eyebrow{max-width:50%}
+.actions{max-width:60%}
+@media(max-width:720px){body{background-attachment:scroll;background-size:auto 1050px;background-position:center top 70px}.hero{min-height:395px}.cards{grid-template-columns:1fr}.feature{min-height:295px}.feature img{width:100%}.feature-copy>p:not(.eyebrow),.feature .eyebrow{max-width:77%}.actions{max-width:90%}}
