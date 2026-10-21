@@ -1,0 +1,54 @@
+name: Verify staging translation preflight without paid translation
+on:
+  push:
+    paths:
+      - '.github/workflows/staging-translation-preflight.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check actual staging endpoint CORS using OPTIONS only
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p preview/verification
+          python - <<'PY' > preview/verification/staging-translation-preflight.log
+          import urllib.request
+          endpoint="https://titeccsfyanjqmzofjrr.supabase.co/functions/v1/translate-website-staging"
+          origin="https://rozmckenna-lgtm.github.io"
+          request=urllib.request.Request(endpoint,method="OPTIONS",headers={
+              "Origin":origin,
+              "Access-Control-Request-Method":"POST",
+              "Access-Control-Request-Headers":"content-type"
+          })
+          try:
+              with urllib.request.urlopen(request,timeout=15) as response:
+                  allow=response.headers.get("access-control-allow-origin","")
+                  methods=response.headers.get("access-control-allow-methods","")
+                  headers=response.headers.get("access-control-allow-headers","")
+                  print("endpoint=translate-website-staging")
+                  print("status="+str(response.status))
+                  print("allowed_origin="+allow)
+                  print("allowed_methods="+methods)
+                  print("allowed_headers="+headers)
+                  if response.status != 204 or allow != origin or "POST" not in methods or "content-type" not in headers.lower():
+                      raise SystemExit("FAIL: staging browser preflight")
+                  print("PASS: browser preflight accepted; no translation POST performed")
+          except Exception as e:
+              print("FAIL: "+str(e))
+              raise
+          PY
+          cat preview/verification/staging-translation-preflight.log
+      - name: Save preflight evidence
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview/verification/staging-translation-preflight.log
+          git diff --cached --quiet || (git commit -m 'Record non-billable staging translation preflight [skip ci]' && git push)
