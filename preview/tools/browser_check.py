@@ -2,7 +2,7 @@ from pathlib import Path
 from playwright.sync_api import sync_playwright
 import json
 
-PAGES = ["index.html", "creators.html", "decision-makers.html", "pitchup.html", "loi.html", "creator-centre.html", "distracted-audience.html", "does-a-story-have-to-be-fast.html", "john-malkovich.html", "realistic-film-budget.html", "screenplay-baby.html"]
+PAGES = ["index.html", "creators.html", "decision-makers.html", "pitchup.html", "loi.html", "creator-centre.html", "distracted-audience.html", "does-a-story-have-to-be-fast.html", "john-malkovich.html", "realistic-film-budget.html", "screenplay-baby.html", "thank-you.html"]
 BASE = "http://127.0.0.1:8765/preview/"
 OUT = Path("browser-evidence")
 OUT.mkdir(exist_ok=True)
