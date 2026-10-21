@@ -224,3 +224,13 @@ body{color:var(--cream);font-family:Inter,Arial,sans-serif;font-weight:400}
 .resource-library{border-top-color:#b79a6345}
 .district-about-copy p,.reading-inner>p:not(.eyebrow),.resource-library>p{color:#d4cbd0}
 @media(max-width:1100px){.sidebar-toggle{background:#111016f2;border-color:#c9a76d}}
+
+/* Screenshot-derived sunburst: fine, evenly spaced gold rays, concentric centre.
+   Pure CSS is transparent and cannot introduce a boxed logo background. */
+.gold-sun{position:relative;display:inline-block;flex:0 0 51px;width:51px;height:51px;font-size:0!important;line-height:0;isolation:isolate}
+.gold-sun::before{content:"";position:absolute;inset:0;border-radius:50%;background:repeating-conic-gradient(from 0deg,#c9a76d 0deg 2deg,transparent 2deg 15deg);-webkit-mask:radial-gradient(circle,transparent 0 31%,#000 32% 93%,transparent 94%);mask:radial-gradient(circle,transparent 0 31%,#000 32% 93%,transparent 94%)}
+.gold-sun::after{content:"";position:absolute;inset:36%;border:1.8px solid #c9a76d;border-radius:50%;box-shadow:0 0 0 4px #0c0c1000}
+.sidebar-brand .gold-sun{width:48px;height:48px;flex-basis:48px}
+.sidebar-brand .gold-words strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:29px}
+.sidebar-brand .gold-words small{font-size:9px;letter-spacing:.32em}
+@media(max-width:560px){.topbar .gold-sun{width:32px;height:32px;flex-basis:32px}}
