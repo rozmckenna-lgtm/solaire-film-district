@@ -1,0 +1,14 @@
+/* Cinematic interior staging: English originals only, one reading column. */
+:root{--color-bg:#130c11;--color-bg-alt:#211018;--color-surface:#2d1721;--color-text:#eee3cd;--color-text-muted:#cdbfb2;--color-gold:#d9bb7d;--color-gold-hover:#f2d9a1;--color-gold-dim:#b18e56;--color-white:#eee3cd;--color-border:#78503f;--color-focus:#d9bb7d;--font-heading:'Cormorant Garamond',Georgia,serif;--font-body:Inter,Arial,sans-serif}
+body{background:linear-gradient(145deg,#180c13,#28111d 50%,#110b11);color:var(--color-text)}
+.site-header{background:#130c11!important;border-bottom:1px solid #b8955b66}
+.site-header .nav-item{color:#eee3cd}
+.site-header .nav-item:hover,.site-header .nav-item:focus-visible{color:#d9bb7d}
+.bilingual{display:block!important;max-width:860px;margin-inline:auto}
+.bilingual-en{width:100%;color:#eee3cd}
+.bilingual-fr,.hero-intro-fr{display:none!important}
+main{max-width:1200px;margin-inline:auto}
+h1,h2,h3{color:#eee3cd}
+a:focus-visible{outline:2px solid #d9bb7d}
+footer{background:#130c11;border-top:1px solid #b8955b55}
+@media(max-width:720px){main{max-width:100%}.bilingual{width:100%}.site-header .container{flex-wrap:wrap;gap:10px}}
