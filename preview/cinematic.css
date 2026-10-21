@@ -87,3 +87,12 @@ body{background:#130b12 url('https://media.base44.com/images/public/6ad768462ea5
 .district-about-actions a{border:1px solid #c7a773;color:var(--cream);padding:12px 17px;font-size:13px}
 .district-about-actions a:hover,.district-about-actions a:focus-visible{background:#4d2b37}
 @media(max-width:720px){.district-about{padding:48px 20px}.district-about-inner{grid-template-columns:1fr;gap:15px}}
+
+/* Existing downloadable creator resources on the cinematic homepage. */
+.resource-library{margin-top:42px;padding-top:30px;border-top:1px solid #b8955b66}
+.resource-library h3{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:clamp(29px,3vw,40px);color:var(--cream);margin:0 0 8px}
+.resource-library>p{max-width:660px;color:#d5c7b9;font-size:14px;margin:0 0 19px}
+.resource-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;list-style:none;padding:0;margin:0}
+.resource-list a{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:16px 19px;border:1px solid #c4a76e66;background:#26131b;color:var(--cream);font-size:14px;min-height:58px}
+.resource-list a:hover,.resource-list a:focus-visible{background:#482535;border-color:var(--gold)}
+@media(max-width:720px){.resource-list{grid-template-columns:1fr}.resource-library{margin-top:32px}}
