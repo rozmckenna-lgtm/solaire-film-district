@@ -120,4 +120,18 @@ with sync_playwright() as pw:
             assert "AR_TEST:" not in page.locator("body").inner_text()
         print("PASS arabic-translation-" + outcome + "-direction", flush=True)
         context.close()
+    # Verify the deployed frontend decodes provider HTML entities as plain text.
+    # Mocking avoids a paid Google Translate request.
+    context = browser.new_context(locale="fr-FR", viewport={"width": 390, "height": 844})
+    page = context.new_page()
+    def entity_response(route):
+        route.fulfill(status=200, content_type="application/json",
+                      body=json.dumps({"status": "translated", "text": "L&#39;histoire &amp; le cin&#233;ma &#x2014; &lt;strong&gt;"}))
+    page.route("**/functions/v1/translate-website-staging", entity_response)
+    page.goto(BASE + "thank-you.html", wait_until="domcontentloaded")
+    page.wait_for_function("document.body.innerText.includes(\"L'histoire & le cinéma — <strong>\")", timeout=30000)
+    assert "&#39;" not in page.locator("body").inner_text(), "Encoded apostrophe still visible"
+    assert page.locator("html").get_attribute("lang") == "fr"
+    print("PASS translation-html-entities-decoded", flush=True)
+    context.close()
     browser.close()
