@@ -1,0 +1,38 @@
+{
+  "purpose": "English-only Gamma-to-GitHub source mapping for future sync. This manifest does not itself enable automatic updates.",
+  "verifiedOn": "2026-10-21",
+  "syncEnabled": false,
+  "notes": "Gamma public document URL returned HTTP 403 to unattended retrieval in connected sandbox; do not scrape or claim sync. Existing article pages include js/automatic-translation.js. Three Gamma originals have multiple English candidates; require source reconciliation before automation.",
+  "articles": [
+    {
+      "localPath": "distracted-audience.html",
+      "gammaId": "1iez2py11pb8yrl",
+      "gammaUrl": "https://gamma.app/docs/Screenwriting-for-Distracted-Writers-1iez2py11pb8yrl",
+      "status": "candidate: newer English duplicate; canonical not established"
+    },
+    {
+      "localPath": "does-a-story-have-to-be-fast.html",
+      "gammaId": "g_8sm4qycom0rpyuc",
+      "gammaUrl": "https://gamma.app/docs/Does-a-Story-Have-to-Be-Fast-to-Be-Compelling-annfffa1kk0wj44",
+      "status": "matching English title"
+    },
+    {
+      "localPath": "john-malkovich.html",
+      "gammaId": "jb54fepsfow64in",
+      "gammaUrl": "https://gamma.app/docs/John-Malkovich-Distinct-Character-Dialogue-jb54fepsfow64in",
+      "status": "candidate: newer English duplicate; canonical not established"
+    },
+    {
+      "localPath": "realistic-film-budget.html",
+      "gammaId": "g_qx9xrjswcu0dvkq",
+      "gammaUrl": "https://gamma.app/docs/How-Do-You-Create-a-Realistic-Film-Budget-Solaire-PitchUp-Creator-o57xr35m9hkihet",
+      "status": "matching English title"
+    },
+    {
+      "localPath": "screenplay-baby.html",
+      "gammaId": "5zupllwsm8jzxw5",
+      "gammaUrl": "https://gamma.app/docs/First-Screenplay-Writing-5zupllwsm8jzxw5",
+      "status": "candidate: newer English duplicate; canonical not established"
+    }
+  ]
+}
