@@ -76,3 +76,14 @@ body{background:#130b12 url('https://media.base44.com/images/public/6ad768462ea5
 .reading-list a:hover,.reading-list a:focus-visible{border-color:var(--gold);background:#462231}
 .reading-list a span{color:var(--gold);flex-shrink:0}
 @media(max-width:720px){.reading{padding:42px 20px 55px}.reading-list{grid-template-columns:1fr}.reading-list a{padding:17px 18px}}
+
+/* Film District About: a real in-page destination, separate from the Letter of Intent. */
+.district-about{background:linear-gradient(120deg,#341522,#1a0d15);border-top:1px solid #bd995c66;padding:76px clamp(20px,5vw,80px)}
+.district-about-inner{max-width:1160px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:clamp(28px,5vw,95px);align-items:start}
+.district-about h2{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(38px,4.2vw,64px);font-weight:500;line-height:1.12;margin:12px 0;color:var(--cream)}
+.district-about h2 em{color:var(--gold);font-weight:400}
+.district-about-copy p{font-size:15px;color:#e0d0c1;margin:0 0 18px}
+.district-about-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:27px}
+.district-about-actions a{border:1px solid #c7a773;color:var(--cream);padding:12px 17px;font-size:13px}
+.district-about-actions a:hover,.district-about-actions a:focus-visible{background:#4d2b37}
+@media(max-width:720px){.district-about{padding:48px 20px}.district-about-inner{grid-template-columns:1fr;gap:15px}}
