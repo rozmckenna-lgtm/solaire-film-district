@@ -7,6 +7,13 @@
   const isProduction = ["solairefilmdistrict.fr", "www.solairefilmdistrict.fr"].includes(location.hostname);
   const API = API_BASE + (isProduction ? "translate-website" : "translate-website-staging");
   const language = (navigator.languages?.[0] || navigator.language || "en").split("-")[0].toLowerCase();
+  // Keep the document language accurate for screen readers once translated content arrives.
+  // Do not change it on failed requests, when the visible page remains English.
+  let translatedCount = 0;
+  function markTranslated() {
+    translatedCount++;
+    if (translatedCount === 1) document.documentElement.lang = language;
+  }
   if (!/^[a-z]{2,3}$/.test(language)) return;
   // Staging uses English as the sole canonical source. Never reveal legacy French duplicates.
   const pageLanguage = (document.documentElement.lang || "en").split("-")[0].toLowerCase();
@@ -67,7 +74,7 @@
     originals.set(node, source); pending.add(node);
     try {
       const value = await translate(source);
-      if (value && node.isConnected && node.nodeValue === source) node.nodeValue = value;
+      if (value && node.isConnected && node.nodeValue === source) { node.nodeValue = value; markTranslated(); }
       if (value) completed.add(node);
     } finally { pending.delete(node); }
   }
