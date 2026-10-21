@@ -34,3 +34,8 @@ Remove Gamma A/CNAME records only when ready. Preserve all OVH MX, SPF, DKIM, SR
 - Keep exactly one maintained English original for each website page, article and document. Other languages are presented through automatic browser-language translation, not separately maintained French copies.
 - Do not create French duplicates or spend further time deleting legacy French article addresses. The existing `*-fr.html` files are small redirects to English originals, not duplicate content; retain them to protect old links.
 - Do not initiate a separate French-content cleanup task. Continue the website completion critical path. PDF translation requires separate functionality and must not be assumed to work from webpage translation.
+
+## Gamma source reconciliation — 21 October 2026
+- Authenticated Gamma reads of three previously proposed article IDs (`1iez2py11pb8yrl`, `jb54fepsfow64in`, `5zupllwsm8jzxw5`) returned the unrelated document **COMMENT FINANCER MON FILM ?**. These IDs are blocked in `preview/gamma-english-sources.json`; never use them for article updates.
+- Two other source records have matching English titles. Automatic Gamma sync remains disabled pending verified canonical sources and authenticated scheduled retrieval. No original website articles were changed.
+- Next: locate the correct three original English Gamma documents, then implement a guarded update process with validation and rollback before enabling automation.
