@@ -22,7 +22,7 @@
       "status": 200,
       "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/automatic-translation.js",
       "content_type": "application/javascript; charset=utf-8",
-      "bytes": 5520
+      "bytes": 5729
     },
     {
       "path": "creator-centre.html",
@@ -37,6 +37,20 @@
       "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/john-malkovich.html",
       "content_type": "text/html; charset=utf-8",
       "bytes": 5471
+    },
+    {
+      "path": "thank-you.html",
+      "status": 200,
+      "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/thank-you.html",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 1006
+    },
+    {
+      "path": "loi.html",
+      "status": 200,
+      "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/loi.html",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 7375
     }
   ],
   "all_ok": true,
