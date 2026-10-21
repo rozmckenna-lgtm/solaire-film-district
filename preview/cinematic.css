@@ -234,3 +234,23 @@ body{color:var(--cream);font-family:Inter,Arial,sans-serif;font-weight:400}
 .sidebar-brand .gold-words strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:29px}
 .sidebar-brand .gold-words small{font-size:9px;letter-spacing:.32em}
 @media(max-width:560px){.topbar .gold-sun{width:32px;height:32px;flex-basis:32px}}
+
+/* Gold globe banner composition based on Roz's supplied PitchUp banner.
+   The established staging globe artwork remains unchanged; the lettering is HTML. */
+.hero{min-height:clamp(590px,53vw,740px);background-position:center center}
+.hero-banner-brand{position:absolute;z-index:2;top:16%;left:clamp(22px,6%,110px);width:min(41%,460px);display:flex;flex-direction:column;align-items:center;color:#e2bd7c;text-align:center;pointer-events:none}
+.hero-banner-sun{width:118px;height:118px;display:block;position:relative;margin-bottom:20px;background:repeating-conic-gradient(from 0deg,#e8bf72 0deg 1.5deg,transparent 1.5deg 15deg);-webkit-mask:radial-gradient(circle,transparent 0 6%,#000 8% 97%,transparent 98%);mask:radial-gradient(circle,transparent 0 6%,#000 8% 97%,transparent 98%);filter:drop-shadow(0 0 3px #e8ad56)}
+.hero-banner-title{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(48px,6vw,100px);font-weight:400;line-height:.95;letter-spacing:.045em}
+.hero-banner-rule{display:block;width:94%;height:1px;background:#e2bd7c;margin:13px 0 12px}
+.hero-banner-subtitle{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(19px,2.6vw,40px);letter-spacing:.26em;white-space:nowrap;line-height:1.1}
+.hero .hero-inner{position:relative;z-index:2;align-self:flex-end;margin:0 auto;padding:0 0 35px;width:min(1120px,88%)}
+.hero .hero-inner .eyebrow,.hero .hero-inner h1,.hero .hero-inner .hero-intro{display:none}
+.hero .hero-link{margin:0;background:#0c0c10c9;padding:11px 16px;border:1px solid #d2b277;color:#f0d49e}
+@media(max-width:750px){
+.hero{min-height:540px;background-position:60% center}
+.hero-banner-brand{top:17%;left:5%;width:58%}
+.hero-banner-sun{width:75px;height:75px;margin-bottom:14px}
+.hero-banner-title{font-size:clamp(36px,8vw,65px)}
+.hero-banner-subtitle{font-size:clamp(15px,3.6vw,27px);letter-spacing:.15em}
+.hero .hero-inner{width:90%}
+}
