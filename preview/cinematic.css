@@ -281,3 +281,16 @@ body{color:var(--cream);font-family:Inter,Arial,sans-serif;font-weight:400}
 .hero .hero-inner .eyebrow,.hero .hero-inner h1,.hero .hero-inner .hero-intro{display:block}
 .hero .hero-inner{align-self:center;margin-left:auto;margin-right:auto}
 @media(max-width:750px){.sidebar-brand .gold-sun.actual-solaire-mark{width:36px!important;height:36px!important;flex-basis:36px!important}}
+
+/* Use the actual PitchUp dashboard sunrise-on-Earth banner, without modifying
+   the app. Its baked-in PitchUp wording is obscured on the left, replaced by
+   accessible HTML Film District branding at restrained banner scale. */
+.hero{position:relative;min-height:clamp(350px,32vw,510px)!important;background-image:url("https://media.base44.com/images/public/6aad88e42bfa4632edae24bb/be2231eab_SolairePitchupbanner.png")!important;background-size:cover!important;background-position:center center!important;overflow:hidden}
+.hero::before{content:"";position:absolute;z-index:1;inset:0 auto 0 0;width:51%;background:linear-gradient(90deg,#050506 0%,#050506 73%,#050506ec 89%,transparent 100%);pointer-events:none}
+.hero-banner-brand{display:flex!important;top:22%!important;left:4%!important;width:40%!important;align-items:center;pointer-events:none}
+.hero-banner-sun.actual-solaire-mark{width:64px!important;height:64px!important;margin:0 auto 8px!important}
+.hero-banner-title{font-size:clamp(32px,4vw,65px)!important}
+.hero-banner-rule{margin:7px 0!important}
+.hero-banner-subtitle{font-size:clamp(13px,1.7vw,26px)!important;letter-spacing:.2em!important}
+.hero .hero-inner{display:none!important}
+@media(max-width:750px){.hero{min-height:270px!important;background-position:57% center!important}.hero::before{width:63%;background:linear-gradient(90deg,#050506 0%,#050506 60%,#050506ed 80%,transparent 100%)}.hero-banner-brand{top:20%!important;left:3%!important;width:54%!important}.hero-banner-sun.actual-solaire-mark{width:42px!important;height:42px!important}.hero-banner-title{font-size:clamp(27px,6vw,43px)!important}.hero-banner-subtitle{font-size:clamp(11px,2.8vw,17px)!important}}
