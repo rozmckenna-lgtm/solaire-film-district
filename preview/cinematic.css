@@ -142,3 +142,13 @@ img,video{max-width:100%}
   .district-content .topbar .brand-logo{max-width:155px}
 }
 @media(prefers-reduced-motion:reduce){.district-sidebar,.sidebar-backdrop{transition:none}}
+
+/* PitchUp app-inspired smoky aubergine; retain original Solaire artwork. */
+:root{--dark:#0b090e;--wine:#302438;--smoke:#34283b}
+.district-sidebar{background:linear-gradient(165deg,#2d2134 0%,#1b1521 35%,#0c0a10 100%);border-right-color:#ac8a5a66}
+.sidebar-nav a.active{background:#382b42}
+.sidebar-nav a:hover,.sidebar-nav a:focus-visible{background:#403149}
+.sidebar-brand{background:transparent}
+.sidebar-brand img,.district-content .brand-logo{mix-blend-mode:screen}
+.district-content .feature,.district-content .card{background-color:#302438}
+.sidebar-account{background:#302438}
