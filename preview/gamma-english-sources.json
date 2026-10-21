@@ -2,7 +2,7 @@
   "purpose": "English-only Gamma-to-GitHub source mapping for future sync. This manifest does not itself enable automatic updates.",
   "verifiedOn": "2026-10-21",
   "syncEnabled": false,
-  "notes": "Gamma full-text search identifies English originals. Gamma read_gamma returns unrelated documents for three IDs, so sync stays disabled. Alternative authenticated Gamma export was tested on 1iez2py11pb8yrl: completed PDF export titled Screenwriting-for-Distracted-Writers.pdf (export JRK-3tkK_Hmko8Lws2-qj); Gamma resolved export to internal ID g_553npd1r2inv7x9. PDF contents could not be inspected from this runtime (download URL inaccessible), so this is not proof of content correctness. Do not overwrite article HTML until validated content and automated retrieval are available.",
+  "notes": "21 Oct: authenticated Gamma read_gamma succeeds on the document URL slug IDs annfffa1kk0wj44 and o57xr35m9hkihet, returning correct English titles; earlier g_ IDs were theme IDs, not document IDs. Three other candidate slug IDs still return unrelated French content despite search hits, so never auto-sync them. No scheduled credential verified.",
   "articles": [
     {
       "localPath": "distracted-audience.html",
@@ -14,10 +14,11 @@
     },
     {
       "localPath": "does-a-story-have-to-be-fast.html",
-      "gammaId": "g_8sm4qycom0rpyuc",
+      "gammaId": "annfffa1kk0wj44",
       "gammaUrl": "https://gamma.app/docs/Does-a-Story-Have-to-Be-Fast-to-Be-Compelling-annfffa1kk0wj44",
-      "status": "matching English title",
-      "verifiedCanonical": true
+      "status": "Verified authenticated read_gamma by document URL slug ID: correct English article title; theme ID g_8sm4qycom0rpyuc was not the document ID",
+      "verifiedCanonical": true,
+      "gammaLastSeenUpdated": "2026-10-20T14:40:47.261Z"
     },
     {
       "localPath": "john-malkovich.html",
@@ -29,9 +30,9 @@
     },
     {
       "localPath": "realistic-film-budget.html",
-      "gammaId": "g_qx9xrjswcu0dvkq",
+      "gammaId": "o57xr35m9hkihet",
       "gammaUrl": "https://gamma.app/docs/How-Do-You-Create-a-Realistic-Film-Budget-Solaire-PitchUp-Creator-o57xr35m9hkihet",
-      "status": "matching English title",
+      "status": "Verified authenticated read_gamma by document URL slug ID: correct English article title; theme ID g_qx9xrjswcu0dvkq was not the document ID",
       "verifiedCanonical": true
     },
     {
@@ -44,7 +45,7 @@
     }
   ],
   "retrievalAssessment": {
-    "authenticatedGammaConnector": "Gamma full-text search located the expected English titles and English article text for all five mapped IDs. Earlier read_gamma responses appeared mismatched for three IDs; reconcile retrieval before automation.",
+    "authenticatedGammaConnector": "Authenticated read_gamma verified correct English title for two slug IDs; three candidate IDs still return unrelated French documents. Only two may proceed to guarded dry-run conversion; no automatic overwrites.",
     "publicHTML": "Gamma returned HTTP 403 in connected sandbox; direct unauthenticated scraping is not viable.",
     "automatedAPI": "Gamma documents authenticated REST read/export endpoints, but no scheduled API credential or GitHub Actions secret has been verified. Do not activate synchronization until authenticated retrieval, content conversion and safe commit validation are tested.",
     "translation": "All five existing local English HTML pages load js/automatic-translation.js; no cross-origin iframe translation is assumed.",
