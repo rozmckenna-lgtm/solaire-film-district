@@ -1,11 +1,2 @@
-Traceback (most recent call last):
-  File "/home/runner/work/solaire-film-district/solaire-film-district/preview/tools/staging_gamma_update.py", line 61, in <module>
-    if __name__=="__main__":main()
-                            ^^^^^^
-  File "/home/runner/work/solaire-film-district/solaire-film-district/preview/tools/staging_gamma_update.py", line 55, in main
-    result,changes=prepare(page.name,page.read_text(encoding="utf-8"),Path(args.fragment).read_text(encoding="utf-8"))
-                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/home/runner/work/solaire-film-district/solaire-film-district/preview/tools/staging_gamma_update.py", line 39, in prepare
-    return updated, diff
-                    ^^^^
-NameError: name 'diff' is not defined
+{"article": "does-a-story-have-to-be-fast.html", "staged": "preview/verification/gamma-update-review/does-a-story-have-to-be-fast.html", "diff": "preview/verification/gamma-update-review/does-a-story-have-to-be-fast.diff", "changed": true}
+{"article": "realistic-film-budget.html", "staged": "preview/verification/gamma-update-review/realistic-film-budget.html", "diff": "preview/verification/gamma-update-review/realistic-film-budget.diff", "changed": true}
