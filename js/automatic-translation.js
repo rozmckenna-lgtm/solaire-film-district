@@ -25,6 +25,8 @@
   } else choosePairedLanguage();
   const pageLanguage = (document.documentElement.lang || "en").split("-")[0].toLowerCase();
   if (language === pageLanguage) return;
+  // On bilingual pages, an already-visible French passage is not English source text.
+  // Do not translate it again; only the source-language passages are eligible.
   const protectedSelector = "script,style,noscript,textarea,code,pre,svg,[contenteditable],[translate='no'],[data-no-translate],iframe";
   const originals = new WeakMap(), cache = new Map(), pending = new Set(), completed = new WeakSet();
   const MAX_CONCURRENT_REQUESTS = 2;
@@ -72,6 +74,7 @@
     // Preserve inline passages in a language different from the page source.
     const marked = node.parentElement?.closest("[lang]");
     if (marked && marked.lang.split("-")[0].toLowerCase() !== pageLanguage) return;
+    if (node.parentElement?.closest(".bilingual, .hero-intro") && node.parentElement?.closest("[hidden]")) return;
     originals.set(node, source); pending.add(node);
     try {
       const value = await translate(source);
