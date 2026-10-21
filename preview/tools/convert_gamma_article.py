@@ -36,14 +36,13 @@ class Extract(HTMLParser):
         if tag=="section" and self.depth>0:self.depth-=1
     def handle_data(self,data):
         if self.depth>0:self.out.append(html.escape(data))
-def convert(raw, expected_title=None):
+def convert(raw, expected_title):
     # Fail closed if the authenticated response is not an English article.
     title_match = re.search(r"(?m)^Title:\s*(.+)$", raw)
     if title_match and (title_match.group(1).strip().upper().startswith("COMMENT FINANCER MON FILM") or not title_match.group(1).strip()):
         raise ValueError("Unrelated or invalid Gamma source title")
-    if expected_title:
-        if not title_match or title_match.group(1).strip().casefold() != expected_title.strip().casefold():
-            raise ValueError("Gamma title does not match the expected English original")
+    if not expected_title or not title_match or title_match.group(1).strip().casefold() != expected_title.strip().casefold():
+        raise ValueError("Gamma title does not match the expected English original")
     start=raw.find("<div><section")
     if start<0: raise ValueError("Gamma article sections not found")
     p=Extract();p.feed(raw[start:])
