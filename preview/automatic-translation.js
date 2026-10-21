@@ -7,16 +7,8 @@
   const isProduction = ["solairefilmdistrict.fr", "www.solairefilmdistrict.fr"].includes(location.hostname);
   const API = API_BASE + (isProduction ? "translate-website" : "translate-website-staging");
   const language = (navigator.languages?.[0] || navigator.language || "en").split("-")[0].toLowerCase();
-  // Keep the document language accurate for screen readers once translated content arrives.
-  // Do not change it on failed requests, when the visible page remains English.
-  let translatedCount = 0;
-  function markTranslated() {
-    translatedCount++;
-    if (translatedCount === 1) {
-      document.documentElement.lang = language;
-      if (["ar", "he", "fa", "ur"].includes(language)) document.documentElement.dir = "rtl";
-    }
-  }
+  // Keep the English page visible until a complete translated batch is ready.
+  // Swapping the batch synchronously avoids visibly mixing two languages.
   if (!/^[a-z]{2,3}$/.test(language)) return;
   // Staging uses English as the sole canonical source. Never reveal legacy French duplicates.
   const pageLanguage = (document.documentElement.lang || "en").split("-")[0].toLowerCase();
@@ -89,29 +81,27 @@
     if (!result) cache.delete(key);
     return result;
   }
-  async function process(node) {
-    if (pending.has(node) || completed.has(node)) return;
+  async function prepareText(node) {
+    if (pending.has(node) || completed.has(node)) return null;
     const source = originals.get(node) || node.textContent;
-    if (!source?.trim() || source.length > 800) return;
-    // Preserve inline passages in a language different from the page source.
+    if (!source?.trim() || source.length > 800) return null;
     const marked = node.parentElement?.closest("[lang]");
-    if (marked && marked !== document.documentElement && marked.lang.split("-")[0].toLowerCase() !== pageLanguage) return;
-    if (node.parentElement?.closest(".bilingual, .hero-intro") && node.parentElement?.closest("[hidden]")) return;
+    if (marked && marked !== document.documentElement && marked.lang.split("-")[0].toLowerCase() !== pageLanguage) return null;
     originals.set(node, source); pending.add(node);
     try {
       const value = await translate(source);
-      if (value && node.isConnected && node.nodeValue === source) { node.nodeValue = value; markTranslated(); }
-      if (value) completed.add(node);
+      return value ? {node, source, value} : null;
     } finally { pending.delete(node); }
   }
   // Translate visitor-facing attributes as well as visible text.
   // Keep addresses, form field names, URLs, values and user input untouched.
   const attributes = ["placeholder", "aria-label", "title", "alt"];
   const attributeDone = new WeakMap();
-  async function processAttributes(element) {
-    if (element.closest(protectedSelector + ",[hidden]")) return;
+  async function prepareAttributes(element) {
+    if (element.closest(protectedSelector + ",[hidden]")) return [];
     let seen = attributeDone.get(element);
     if (!seen) { seen = new Set(); attributeDone.set(element, seen); }
+    const updates = [];
     for (const attribute of attributes) {
       if (seen.has(attribute) || !element.hasAttribute(attribute)) continue;
       const original = element.getAttribute(attribute);
@@ -119,9 +109,9 @@
       seen.add(attribute);
       const translated = await translate(original);
       if (!translated) seen.delete(attribute);
-      if (translated && element.isConnected && element.getAttribute(attribute) === original)
-        element.setAttribute(attribute, translated);
+      else updates.push({element, attribute, original, translated});
     }
+    return updates;
   }
   async function translateDocumentMetadata() {
     const originalTitle = document.title;
@@ -141,16 +131,37 @@
     }
   }
   void translateDocumentMetadata();
-  let queued = false;
-  function scan() {
-    if (queued) return; queued = true;
-    queueMicrotask(() => {
-      queued = false;
-      for (const node of textNodes()) if (!completed.has(node)) void process(node);
-      for (const element of document.querySelectorAll("[placeholder],[aria-label],[title],[alt]")) void processAttributes(element);
-    });
+  let scanning = false, scanAgain = false;
+  async function scan() {
+    if (scanning) { scanAgain = true; return; }
+    scanning = true;
+    try {
+      const nodes = textNodes().filter(node => !completed.has(node));
+      const elements = [...document.querySelectorAll("[placeholder],[aria-label],[title],[alt]")];
+      const [texts, attrs] = await Promise.all([
+        Promise.all(nodes.map(prepareText)),
+        Promise.all(elements.map(prepareAttributes))
+      ]);
+      // Never show a half-translated page. On any failure retain the English original.
+      if (texts.some((item, i) => !item && !completed.has(nodes[i]))) return;
+      const changes = texts.filter(Boolean);
+      // All visible text updates are synchronous, so the browser paints one language.
+      for (const {node, source, value} of changes) {
+        if (node.isConnected && node.nodeValue === source) { node.nodeValue = value; completed.add(node); }
+      }
+      for (const group of attrs) for (const {element, attribute, original, translated} of group) {
+        if (element.isConnected && element.getAttribute(attribute) === original) element.setAttribute(attribute, translated);
+      }
+      if (changes.length) {
+        document.documentElement.lang = language;
+        document.documentElement.dir = ["ar", "he", "fa", "ur"].includes(language) ? "rtl" : "ltr";
+      }
+    } finally {
+      scanning = false;
+      if (scanAgain) { scanAgain = false; void scan(); }
+    }
   }
-  new MutationObserver(scan).observe(document.documentElement, { childList: true, subtree: true });
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", scan, { once: true });
-  else scan();
+  new MutationObserver(() => { void scan(); }).observe(document.documentElement, { childList: true, subtree: true });
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", () => { void scan(); }, { once: true });
+  else void scan();
 })();
