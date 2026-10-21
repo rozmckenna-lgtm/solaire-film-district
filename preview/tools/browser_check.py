@@ -66,12 +66,14 @@ with sync_playwright() as pw:
             page.close()
         context.close()
     # Verify actual form-submit handling without sending a real Letter of Intent.
-    for outcome in ("failure", "success"):
+    for outcome in ("failure", "success", "timeout"):
         context = browser.new_context(viewport={"width": 390, "height": 844}, locale="en-GB")
         page = context.new_page()
         requests = []
         def formspree_mock(route):
             requests.append(route.request.method)
+            if outcome == "timeout":
+                return  # Deliberately leave request unanswered to exercise AbortController.
             route.fulfill(status=200 if outcome == "success" else 422,
                           content_type="application/json",
                           headers={"access-control-allow-origin": "*"},
@@ -85,7 +87,7 @@ with sync_playwright() as pw:
         if outcome == "success":
             page.wait_for_url(BASE + "thank-you.html", timeout=10000)
         else:
-            page.locator("#loi-form-status").get_by_text("could not be submitted", exact=False).wait_for(timeout=10000)
+            page.locator("#loi-form-status").get_by_text("could not be submitted", exact=False).wait_for(timeout=21000)
             assert page.url.endswith("/loi.html"), "Failed submission must not show confirmation"
             assert page.locator('button[type="submit"]').is_enabled(), "Failed submission must permit retry"
         assert requests == ["POST"], "Form submission must send one POST only"
