@@ -151,9 +151,19 @@
         return;
       }
       const changes = texts.filter(Boolean);
+      // A late DOM update can invalidate a prepared translation batch.
+      // Abort the entire batch rather than mixing translated and new English text.
+      if (changes.some(({node, source}) => !node.isConnected || node.nodeValue !== source)) {
+        for (const group of attrs) for (const {element, attribute} of group) {
+          attributeDone.get(element)?.delete(attribute);
+        }
+        scanAgain = true;
+        return;
+      }
       // All visible text updates are synchronous, so the browser paints one language.
-      for (const {node, source, value} of changes) {
-        if (node.isConnected && node.nodeValue === source) { node.nodeValue = value; completed.add(node); }
+      for (const {node, value} of changes) {
+        node.nodeValue = value;
+        completed.add(node);
       }
       for (const group of attrs) for (const {element, attribute, original, translated} of group) {
         if (element.isConnected && element.getAttribute(attribute) === original) element.setAttribute(attribute, translated);
