@@ -37,15 +37,21 @@ class Extract(HTMLParser):
     def handle_data(self,data):
         if self.depth>0:self.out.append(html.escape(data))
 def convert(raw, expected_title=None):
-    # Fail closed if the authenticated response is not an English article.\n    title_match = re.search(r"(?m)^Title:\\s*(.+)$", raw)\n    if title_match and (title_match.group(1).strip().upper().startswith("COMMENT FINANCER MON FILM") or not title_match.group(1).strip()):\n        raise ValueError("Unrelated or invalid Gamma source title")\n    if expected_title:\n        if not title_match or title_match.group(1).strip().casefold() != expected_title.strip().casefold():\n            raise ValueError("Gamma title does not match the expected English original")\n    start=raw.find("<div><section")
+    # Fail closed if the authenticated response is not an English article.
+    title_match = re.search(r"(?m)^Title:\\s*(.+)$", raw)
+    if title_match and (title_match.group(1).strip().upper().startswith("COMMENT FINANCER MON FILM") or not title_match.group(1).strip()):\n        raise ValueError("Unrelated or invalid Gamma source title")
+    if expected_title:\n        if not title_match or title_match.group(1).strip().casefold() != expected_title.strip().casefold():\n            raise ValueError("Gamma title does not match the expected English original")
+    start=raw.find("<div><section")
     if start<0: raise ValueError("Gamma article sections not found")
     p=Extract();p.feed(raw[start:])
     out="".join(p.out)
-    if p.title_count<1 or len(out)<500: raise ValueError("Missing article title or unexpectedly short content")\n    if re.search(r"(?i)<script|<iframe|javascript:", out):\n        raise ValueError("Unsafe HTML in generated article")
+    if p.title_count<1 or len(out)<500: raise ValueError("Missing article title or unexpectedly short content")
+    if re.search(r"(?i)<script|<iframe|javascript:", out):\n        raise ValueError("Unsafe HTML in generated article")
     return '<article class="gamma-english-article" lang="en">\n'+out+'\n</article>\n'
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("input");ap.add_argument("--output",required=True)
-    ap.add_argument("--expected-title", required=True, help="Exact authenticated English Gamma document title")\n    a=ap.parse_args();source=Path(a.input);target=Path(a.output)
+    ap.add_argument("--expected-title", required=True, help="Exact authenticated English Gamma document title")
+    a=ap.parse_args();source=Path(a.input);target=Path(a.output)
     if target.exists():raise SystemExit("Refusing to overwrite existing file: "+str(target))
     target.write_text(convert(source.read_text(encoding="utf-8"), a.expected_title),encoding="utf-8")
     print("Dry-run fragment written:",target)
