@@ -3,10 +3,11 @@ on:
   push:
     paths:
       - 'preview/**'
+      - '!preview/verification/**'
       - '.github/workflows/preview-browser-check.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   browser-check:
     runs-on: ubuntu-latest
@@ -21,7 +22,21 @@ jobs:
       - name: Serve repository locally
         run: python -m http.server 8765 --bind 127.0.0.1 &
       - name: Browser render and free mocked translation checks
-        run: python preview/tools/browser_check.py
+        id: browser
+        shell: bash
+        run: |
+          set -o pipefail
+          python preview/tools/browser_check.py 2>&1 | tee browser-check.log
+      - name: Commit test evidence for connected GitHub inspection
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p preview/verification
+          if [ -f browser-check.log ]; then cp browser-check.log preview/verification/browser-check.log; else echo 'Browser test did not start; inspect Actions job.' > preview/verification/browser-check.log; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview/verification/browser-check.log
+          git diff --cached --quiet || (git commit -m 'Record cinematic browser verification result [skip ci]' && git push)
       - name: Preserve screenshots
         if: always()
         uses: actions/upload-artifact@v4
