@@ -69,7 +69,7 @@
     if (!source?.trim() || source.length > 800) return;
     // Preserve inline passages in a language different from the page source.
     const marked = node.parentElement?.closest("[lang]");
-    if (marked && marked.lang.split("-")[0].toLowerCase() !== pageLanguage) return;
+    if (marked && marked !== document.documentElement && marked.lang.split("-")[0].toLowerCase() !== pageLanguage) return;
     if (node.parentElement?.closest(".bilingual, .hero-intro") && node.parentElement?.closest("[hidden]")) return;
     originals.set(node, source); pending.add(node);
     try {
