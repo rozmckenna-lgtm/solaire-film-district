@@ -1,56 +1,6 @@
 PASS desktop translated-description-metadata
-PASS desktop five-PDF-content-signatures
-PASS desktop internal-navigation-targets 16
-PASS desktop index.html
-PASS desktop creators.html
-PASS desktop decision-makers.html
-PASS desktop pitchup.html
-PASS desktop LOI-same-origin-confirmation-redirect
-PASS desktop loi.html
-PASS desktop creator-centre.html
-PASS desktop distracted-audience.html
-PASS desktop does-a-story-have-to-be-fast.html
-PASS desktop john-malkovich.html
-PASS desktop realistic-film-budget.html
-PASS desktop screenplay-baby.html
-PASS desktop thank-you.html
-PASS mobile translated-description-metadata
-PASS mobile five-PDF-content-signatures
-PASS mobile internal-navigation-targets 16
-PASS mobile index.html
-PASS mobile creators.html
-PASS mobile decision-makers.html
-PASS mobile pitchup.html
-PASS mobile LOI-same-origin-confirmation-redirect
-PASS mobile loi.html
-PASS mobile creator-centre.html
-PASS mobile distracted-audience.html
-PASS mobile does-a-story-have-to-be-fast.html
-PASS mobile john-malkovich.html
-PASS mobile realistic-film-budget.html
-PASS mobile screenplay-baby.html
-PASS mobile thank-you.html
-PASS loi-mocked-submit-failure
-PASS loi-mocked-submit-success
-PASS loi-mocked-submit-timeout
-PASS arabic-translation-failure-direction
-PASS arabic-translation-success-direction
-PASS translation-html-entities-decoded
-Exception in callback Connection.dispatch.<locals>._done_callback(<Task cancell..._page.py:298>>) at /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:546
-handle: <Handle Connection.dispatch.<locals>._done_callback(<Task cancell..._page.py:298>>) at /opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py:546>
 Traceback (most recent call last):
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/asyncio/events.py", line 88, in _run
-    self._context.run(self._callback, *self._args)
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_connection.py", line 547, in _done_callback
-    exc = future.exception()
-          ^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_page.py", line 312, in _on_route
-    handled = await route_handler.handle(route)
-              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_helper.py", line 443, in handle
-    return await self._handle_internal(route)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/opt/hostedtoolcache/Python/3.12.15/x64/lib/python3.12/site-packages/playwright/_impl/_helper.py", line 485, in _handle_internal
-    return await handled_future
-           ^^^^^^^^^^^^^^^^^^^^
-asyncio.exceptions.CancelledError
+  File "/home/runner/work/solaire-film-district/solaire-film-district/preview/tools/browser_check.py", line 45, in <module>
+    assert "fd49a2c7f_generated_image.png" in computed, f"{device}: globe missing from page background: {computed}"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: desktop: globe missing from page background: none
