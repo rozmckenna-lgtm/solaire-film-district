@@ -35,7 +35,11 @@ def prepare(name, existing, fragment):
     updated = existing[:match.start(2)] + new_body + existing[match.end(2):]
     if updated == existing:
         return updated, ""
-    # The original pages are minified onto one line; split at structural tags so reviewers\n    # can see individual paragraph/heading changes rather than an unreadable giant line.\n    def readable_lines(markup):\n        return re.sub(r"(?=<(?:h[1-6]|p|hr|spacer|ul|ol|li|blockquote)\\b)", "\\n", markup).strip().splitlines(keepends=True)\n    diff = "".join(difflib.unified_diff(readable_lines(original), readable_lines(new_body), fromfile="staging-existing", tofile="authenticated-gamma", n=2))
+    # Split minified article HTML into structural elements for readable diffs.
+    def readable_lines(markup):
+        split = re.sub(r"(?=<(?:h[1-6]|p|hr|spacer|ul|ol|li|blockquote)\\b)", "\\n", markup)
+        return [line + "\\n" for line in split.strip().splitlines()]
+    diff = "".join(difflib.unified_diff(readable_lines(original), readable_lines(new_body), fromfile="staging-existing", tofile="authenticated-gamma", n=2))
     return updated, diff
 
 def main():
