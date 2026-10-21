@@ -1,0 +1,4 @@
+PASS staging OPTIONS 204 and exact allowed origin
+PASS untrusted origin rejected 403
+PASS preview translation JS targets isolated staging function
+NO paid Google translation request performed
