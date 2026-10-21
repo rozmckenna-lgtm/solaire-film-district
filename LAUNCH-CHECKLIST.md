@@ -29,3 +29,8 @@ All five PDFs are committed to GitHub and linked directly from `creator-centre.h
 Apex A records: `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`.
 `www` CNAME: `rozmckenna-lgtm.github.io.`
 Remove Gamma A/CNAME records only when ready. Preserve all OVH MX, SPF, DKIM, SRV, NS and verification records. Check any existing OVH root redirect before switching. Do not alter the .com domain.
+
+## Standing content and translation rule (21 October 2026)
+- Keep exactly one maintained English original for each website page, article and document. Other languages are presented through automatic browser-language translation, not separately maintained French copies.
+- Do not create French duplicates or spend further time deleting legacy French article addresses. The existing `*-fr.html` files are small redirects to English originals, not duplicate content; retain them to protect old links.
+- Do not initiate a separate French-content cleanup task. Continue the website completion critical path. PDF translation requires separate functionality and must not be assumed to work from webpage translation.
