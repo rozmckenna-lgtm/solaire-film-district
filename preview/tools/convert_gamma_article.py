@@ -38,7 +38,7 @@ class Extract(HTMLParser):
         if self.depth>0:self.out.append(html.escape(data))
 def convert(raw, expected_title=None):
     # Fail closed if the authenticated response is not an English article.
-    title_match = re.search(r"(?m)^Title:\\s*(.+)$", raw)
+    title_match = re.search(r"(?m)^Title:\s*(.+)$", raw)
     if title_match and (title_match.group(1).strip().upper().startswith("COMMENT FINANCER MON FILM") or not title_match.group(1).strip()):
         raise ValueError("Unrelated or invalid Gamma source title")
     if expected_title:
