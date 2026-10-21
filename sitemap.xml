@@ -25,16 +25,10 @@
     <priority>0.9</priority>
     <changefreq>monthly</changefreq>
   </url>
-  <url>
-    <loc>https://solairefilmdistrict.fr/thank-you.html</loc>
-    <priority>0.3</priority>
-    <changefreq>yearly</changefreq>
-  </url>
-  <url><loc>https://solairefilmdistrict.fr/creator-centre.html</loc><changefreq>monthly</changefreq></url>
+<url><loc>https://solairefilmdistrict.fr/creator-centre.html</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://solairefilmdistrict.fr/distracted-audience.html</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://solairefilmdistrict.fr/john-malkovich.html</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://solairefilmdistrict.fr/screenplay-baby.html</loc><changefreq>monthly</changefreq></url>
-  <url><loc>https://solairefilmdistrict.fr/solaire-pitchup-creators/</loc></url>
-  <url><loc>https://solairefilmdistrict.fr/realistic-film-budget.html</loc><changefreq>monthly</changefreq></url>
+<url><loc>https://solairefilmdistrict.fr/realistic-film-budget.html</loc><changefreq>monthly</changefreq></url>
   <url><loc>https://solairefilmdistrict.fr/does-a-story-have-to-be-fast.html</loc><changefreq>monthly</changefreq></url>
 </urlset>
