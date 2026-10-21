@@ -35,7 +35,7 @@ class GammaSyncGuardTests(unittest.TestCase):
     def test_valid_english_source_creates_only_dry_run_fragment(self):
         title="Does a Story Have to Be Fast to Be Compelling?"
         paragraphs="".join("<p>English source paragraph about screenplay structure and narrative pacing.</p>" for _ in range(12))
-        source=f"Title: {title}\\n<div><section><h1>{title}</h1>{paragraphs}</section></div>"
+        source=f"Title: {title}\n<div><section><h1>{title}</h1>{paragraphs}</section></div>"
         (self.root/"in"/"annfffa1kk0wj44.txt").write_text(source,encoding="utf-8")
         result=self.run_guard()
         self.assertEqual(result[0]["status"],"DRY_RUN_VALIDATED")
@@ -47,7 +47,7 @@ class GammaSyncGuardTests(unittest.TestCase):
     def test_dry_run_refuses_overwrite(self):
         title="Does a Story Have to Be Fast to Be Compelling?"
         paragraphs="".join("<p>English source paragraph about screenplay structure and narrative pacing.</p>" for _ in range(12))
-        (self.root/"in"/"annfffa1kk0wj44.txt").write_text(f"Title: {title}\\n<div><section><h1>{title}</h1>{paragraphs}</section></div>")
+        (self.root/"in"/"annfffa1kk0wj44.txt").write_text(f"Title: {title}\n<div><section><h1>{title}</h1>{paragraphs}</section></div>")
         first=self.run_guard()
         self.assertEqual(first[0]["status"],"DRY_RUN_VALIDATED")
         second=self.run_guard()
