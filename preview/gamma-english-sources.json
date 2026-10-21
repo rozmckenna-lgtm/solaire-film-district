@@ -2,13 +2,13 @@
   "purpose": "English-only Gamma-to-GitHub source mapping for future sync. This manifest does not itself enable automatic updates.",
   "verifiedOn": "2026-10-21",
   "syncEnabled": false,
-  "notes": "Authenticated Gamma read of three candidate IDs returned the unrelated French-titled document 'COMMENT FINANCER MON FILM ?' for each. Those mappings are unsafe and must never be used for automatic article overwrites. Two English originals have matching titles; sync remains disabled until authenticated scheduled retrieval and guarded updates work.",
+  "notes": "Gamma full-text search confirms all five mapped article IDs are English-language article documents; three have older English duplicates. A previous read_gamma response mismatch is not proof that the documents themselves are French. Keep sync disabled until authenticated automated retrieval and safe update verification.",
   "articles": [
     {
       "localPath": "distracted-audience.html",
       "gammaId": "1iez2py11pb8yrl",
       "gammaUrl": "https://gamma.app/docs/Screenwriting-for-Distracted-Writers-1iez2py11pb8yrl",
-      "status": "BLOCKED: Gamma connector resolves candidate ID to unrelated 'COMMENT FINANCER MON FILM ?'; do not sync",
+      "status": "English original candidate confirmed by Gamma full-text search; multiple English versions exist, canonical edition not yet established",
       "verifiedCanonical": false
     },
     {
@@ -22,7 +22,7 @@
       "localPath": "john-malkovich.html",
       "gammaId": "jb54fepsfow64in",
       "gammaUrl": "https://gamma.app/docs/John-Malkovich-Distinct-Character-Dialogue-jb54fepsfow64in",
-      "status": "BLOCKED: Gamma connector resolves candidate ID to unrelated 'COMMENT FINANCER MON FILM ?'; do not sync",
+      "status": "English original candidate confirmed by Gamma full-text search; multiple English versions exist, canonical edition not yet established",
       "verifiedCanonical": false
     },
     {
@@ -36,12 +36,12 @@
       "localPath": "screenplay-baby.html",
       "gammaId": "5zupllwsm8jzxw5",
       "gammaUrl": "https://gamma.app/docs/First-Screenplay-Writing-5zupllwsm8jzxw5",
-      "status": "BLOCKED: Gamma connector resolves candidate ID to unrelated 'COMMENT FINANCER MON FILM ?'; do not sync",
+      "status": "English original candidate confirmed by Gamma full-text search; multiple English versions exist, canonical edition not yet established",
       "verifiedCanonical": false
     }
   ],
   "retrievalAssessment": {
-    "authenticatedGammaConnector": "Gamma connector can read matching titles for two English originals. Three candidate IDs resolve to an unrelated French-titled document and must not be used.",
+    "authenticatedGammaConnector": "Gamma full-text search located the expected English titles and English article text for all five mapped IDs. Earlier read_gamma responses appeared mismatched for three IDs; reconcile retrieval before automation.",
     "publicHTML": "Gamma returned HTTP 403 in connected sandbox; direct unauthenticated scraping is not viable.",
     "automatedAPI": "Gamma documents authenticated REST read/export endpoints, but no scheduled API credential or GitHub Actions secret has been verified. Do not activate synchronization until authenticated retrieval, content conversion and safe commit validation are tested.",
     "translation": "All five existing local English HTML pages load js/automatic-translation.js; no cross-origin iframe translation is assumed."
