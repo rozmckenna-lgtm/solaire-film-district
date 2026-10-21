@@ -12,3 +12,11 @@ h1,h2,h3{color:#eee3cd}
 a:focus-visible{outline:2px solid #d9bb7d}
 footer{background:#130c11;border-top:1px solid #b8955b55}
 @media(max-width:720px){main{max-width:100%}.bilingual{width:100%}.site-header .container{flex-wrap:wrap;gap:10px}}
+
+/* Preserve the approved cinematic palette on narrow screens without clipping navigation. */
+.site-header .container{display:flex;align-items:center;flex-wrap:wrap;justify-content:center;gap:12px 20px}
+.site-header .nav-item{max-width:100%;overflow-wrap:anywhere}
+.pillar,.container,.bilingual,.bilingual-en{min-width:0;max-width:100%}
+img,video,iframe{max-width:100%;height:auto}
+.content-section,.loi-hero{overflow-wrap:break-word}
+@media(max-width:720px){.site-header .container{justify-content:flex-start;padding-inline:16px}.site-header .nav-item{font-size:.85rem}.pillar{padding-inline:16px}.hero-intro-en,.bilingual-en{width:100%}}
