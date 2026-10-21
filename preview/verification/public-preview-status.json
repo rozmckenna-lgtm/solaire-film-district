@@ -45,6 +45,8 @@
     "status": 200,
     "content_type": "image/png",
     "png_signature": false,
-    "first_bytes_hex": "ffd8ffe000104a464946000101000001"
+    "first_bytes_hex": "ffd8ffe000104a464946000101000001",
+    "jpeg_signature": true,
+    "valid_raster_image": true
   }
 }
