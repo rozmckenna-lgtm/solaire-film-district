@@ -30,8 +30,8 @@ class Extract(HTMLParser):
         if tag not in VOID:self.stack.append(tag)
     def handle_endtag(self,tag):
         if self.depth>0 and tag in ALLOWED and tag not in VOID:
-            if self.stack and self.stack[-1]==tag:
-                self.stack.pop();self.out.append("</"+tag+">")
+            if self.stack and (self.stack[-1]==tag or (tag=="h1" and self.stack[-1]=="h2")):
+                self.out.append("</"+self.stack.pop()+">")
         if tag=="section" and self.depth>0:self.depth-=1
     def handle_data(self,data):
         if self.depth>0:self.out.append(html.escape(data))
