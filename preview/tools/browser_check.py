@@ -32,10 +32,10 @@ with sync_playwright() as pw:
                 css_response = page.request.get(css_url, timeout=15000)
                 css_text = css_response.text()
                 assert css_response.ok and "fd49a2c7f_generated_image.png" in css_text, f"{device}: cinematic stylesheet missing globe URL"
-                computed = hero.evaluate("(el) => getComputedStyle(el).backgroundImage")
-                if "fd49a2c7f_generated_image.png" not in computed:
-                    print("DIAGNOSTIC globe CSS:", json.dumps({"computed": computed, "stylesheets": page.locator("link[rel=stylesheet]").evaluate_all("(els) => els.map(e => ({href:e.href,loaded:!!e.sheet}))"), "heroClass":hero.get_attribute("class")}), flush=True)
-                    raise AssertionError(f"{device}: hero CSS not applied despite served stylesheet")
+                # Reference-parity design intentionally paints the illuminated globe on BODY
+                # so it continues behind the project cards; the hero overlays gradients.
+                computed = page.locator("body").evaluate("(el) => getComputedStyle(el).backgroundImage")
+                assert "fd49a2c7f_generated_image.png" in computed, f"{device}: globe missing from page background: {computed}"
                 image = page.request.get("https://media.base44.com/images/public/6ad768462ea55ab133e15a41/fd49a2c7f_generated_image.png", timeout=20000)
                 assert image.ok and image.headers.get("content-type", "").startswith("image/"), f"{device}: globe asset unavailable: {image.status}"
             page.screenshot(path=str(OUT / (device + "-" + page_name.replace(".html", ".png"))), full_page=True)
