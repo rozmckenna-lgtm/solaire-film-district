@@ -261,3 +261,23 @@ body{color:var(--cream);font-family:Inter,Arial,sans-serif;font-weight:400}
 .gold-sun.actual-solaire-mark::before,.gold-sun.actual-solaire-mark::after,.hero-banner-sun.actual-solaire-mark::before,.hero-banner-sun.actual-solaire-mark::after{content:none}
 .hero-banner-sun.actual-solaire-mark{width:120px;height:120px;margin:0 auto 18px}
 @media(max-width:750px){.hero-banner-sun.actual-solaire-mark{width:78px;height:78px}}
+
+/* 22 Oct visual correction: match supplied application proportions, not oversized artwork.
+   Soft aubergine is the user-selected #503A59. */
+:root{--soft-aubergine:#503A59}
+.sidebar-brand{padding:20px 18px!important;min-height:105px;display:flex;align-items:center}
+.sidebar-brand .gold-logo{display:inline-flex;align-items:center;gap:12px}
+.sidebar-brand .gold-sun.actual-solaire-mark{width:40px!important;height:40px!important;flex:0 0 40px!important;object-fit:contain}
+.sidebar-brand .gold-words strong{font-size:26px!important;line-height:1;letter-spacing:.12em}
+.sidebar-brand .gold-words small{font-size:9px!important;letter-spacing:.3em}
+.district-sidebar{background:#0a0a0e!important}
+.district-content .feature{background:var(--soft-aubergine)!important;border:1px solid #a18b6c8a}
+.district-content .feature-copy{background:linear-gradient(90deg,#503A59 0%,#503A59f0 50%,#503A5999 76%,transparent 100%)}
+.reading-list a,.resource-list a{background:var(--soft-aubergine);border-color:#a18b6c7d}
+.district-about{background:linear-gradient(115deg,#503A59,#28212d)}
+/* The main banner is globe photography; the compact original logo is in the sidebar.
+   Remove the duplicate enormous wordmark added to the hero. */
+.hero-banner-brand{display:none!important}
+.hero .hero-inner .eyebrow,.hero .hero-inner h1,.hero .hero-inner .hero-intro{display:block}
+.hero .hero-inner{align-self:center;margin-left:auto;margin-right:auto}
+@media(max-width:750px){.sidebar-brand .gold-sun.actual-solaire-mark{width:36px!important;height:36px!important;flex-basis:36px!important}}
