@@ -254,3 +254,10 @@ body{color:var(--cream);font-family:Inter,Arial,sans-serif;font-weight:400}
 .hero-banner-subtitle{font-size:clamp(15px,3.6vw,27px);letter-spacing:.15em}
 .hero .hero-inner{width:90%}
 }
+
+/* The actual Solaire PitchUp sidebar sunburst asset is now used directly.
+   Disable the previously improvised CSS radial logo. */
+.gold-sun.actual-solaire-mark,.hero-banner-sun.actual-solaire-mark{display:block;position:relative;flex:none;width:48px;height:48px;min-width:0;object-fit:contain;object-position:center;background:none!important;border:0;border-radius:0;filter:none;mix-blend-mode:normal;-webkit-mask:none;mask:none}
+.gold-sun.actual-solaire-mark::before,.gold-sun.actual-solaire-mark::after,.hero-banner-sun.actual-solaire-mark::before,.hero-banner-sun.actual-solaire-mark::after{content:none}
+.hero-banner-sun.actual-solaire-mark{width:120px;height:120px;margin:0 auto 18px}
+@media(max-width:750px){.hero-banner-sun.actual-solaire-mark{width:78px;height:78px}}
