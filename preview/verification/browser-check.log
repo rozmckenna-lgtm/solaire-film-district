@@ -9,6 +9,7 @@ PASS desktop does-a-story-have-to-be-fast.html
 PASS desktop john-malkovich.html
 PASS desktop realistic-film-budget.html
 PASS desktop screenplay-baby.html
+PASS desktop thank-you.html
 PASS mobile index.html
 PASS mobile creators.html
 PASS mobile decision-makers.html
@@ -20,3 +21,4 @@ PASS mobile does-a-story-have-to-be-fast.html
 PASS mobile john-malkovich.html
 PASS mobile realistic-film-budget.html
 PASS mobile screenplay-baby.html
+PASS mobile thank-you.html
