@@ -1,0 +1,33 @@
+name: Test Gamma English sync safety guard
+on:
+  push:
+    paths:
+      - 'preview/tools/gamma_sync_guard.py'
+      - 'preview/tools/test_gamma_sync_guard.py'
+      - '.github/workflows/gamma-sync-guard-tests.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  gamma-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Test fail-closed English source guard
+        shell: bash
+        run: |
+          mkdir -p preview/verification
+          set +e
+          python -m unittest discover -s preview/tools -p 'test_gamma_*.py' -v > preview/verification/gamma-sync-guard-test.log 2>&1
+          status=$?
+          cat preview/verification/gamma-sync-guard-test.log
+          exit "$status"
+      - name: Save safety test results
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview/verification/gamma-sync-guard-test.log
+          git diff --cached --quiet || (git commit -m 'Record Gamma sync safety test evidence [skip ci]' && git push)
