@@ -1,0 +1,18 @@
+{
+  "checked": "2026-10-21",
+  "method": "Extract <main> from staging and isolated authenticated-Gamma review pages; normalize apostrophe/quote entities, strip HTML tags and decorative <hr>/<spacer> elements, collapse whitespace; compare entire article text",
+  "articles": [
+    {
+      "page": "does-a-story-have-to-be-fast.html",
+      "textCharacters": 4497,
+      "semanticParity": true
+    },
+    {
+      "page": "realistic-film-budget.html",
+      "textCharacters": 6101,
+      "semanticParity": true
+    }
+  ],
+  "action": "No content replacement needed; do not publish cosmetic-only differences",
+  "limitations": "Checks text parity only, not browser visual rendering, real-time Gamma scheduled sync, or translations"
+}
