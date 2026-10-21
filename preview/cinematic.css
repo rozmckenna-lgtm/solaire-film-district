@@ -96,3 +96,11 @@ body{background:#130b12 url('https://media.base44.com/images/public/6ad768462ea5
 .resource-list a{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:16px 19px;border:1px solid #c4a76e66;background:#26131b;color:var(--cream);font-size:14px;min-height:58px}
 .resource-list a:hover,.resource-list a:focus-visible{background:#482535;border-color:var(--gold)}
 @media(max-width:720px){.resource-list{grid-template-columns:1fr}.resource-library{margin-top:32px}}
+
+/* Responsive cinematic header and content safety. */
+.topbar>*{min-width:0}
+.brand-logo{max-width:100%;height:auto}
+.feature,.feature-copy,.district-about-inner>*,.reading-inner{min-width:0}
+img,video{max-width:100%}
+@media(max-width:920px){.topbar{flex-wrap:wrap;justify-content:center;gap:14px}.nav{order:3;width:100%;gap:12px 20px}.account{margin-left:auto}}
+@media(max-width:560px){.topbar{padding:14px 18px}.brand{max-width:58%}.brand-logo{max-height:48px;width:auto}.account{font-size:10px;padding:9px}.nav{justify-content:flex-start}.nav a{font-size:10px}.hero{min-height:490px}.hero-inner{padding:65px 0 75px}}
