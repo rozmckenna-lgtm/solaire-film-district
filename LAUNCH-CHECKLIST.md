@@ -44,3 +44,10 @@ Remove Gamma A/CNAME records only when ready. Preserve all OVH MX, SPF, DKIM, SR
 - Gamma full-text search identified all five English article documents, including three with multiple English editions. The earlier read_gamma mismatch must not be interpreted as evidence that those English articles are French.
 - Source registry corrected in commit `a1eec8746b820b609f79108609c8af79cf24ed13`. Automatic sync remains disabled until canonical editions, scheduled authentication and safe updates are confirmed.
 - Five converter safety tests executed locally and passed. This does not verify end-to-end sync.
+
+## Cinematic preview static integration audit — 21 October 2026
+- Inspected all five HTML files in `preview/` against current repository root and preview directories. Every relative `href` and `src` reference in those five files resolves to a repository entry; this is source-level verification only, not HTTP or browser testing.
+- All four interior preview pages have no `lang="fr"` blocks or the sampled French duplicate markers. Industry-access form English-only label correction remains committed.
+- Both preview forms retain the existing Formspree endpoint. Neither form has been submitted in a browser; no delivery claim is made.
+- Attempted to open the GitHub Pages cinematic preview in a web reader; it was inaccessible there. Live rendering, image availability, desktop/mobile overflow, and translation are still unverified. Next critical task is accessible rendered staging preview and browser acceptance tests.
+- Preserve rejected root homepage, live DNS and email. Do not resume Gamma automation ahead of preview functionality verification.
