@@ -23,7 +23,8 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", choosePairedLanguage, { once: true });
   } else choosePairedLanguage();
-  if (language === "en") return;
+  const pageLanguage = (document.documentElement.lang || "en").split("-")[0].toLowerCase();
+  if (language === pageLanguage) return;
   const protectedSelector = "script,style,noscript,textarea,code,pre,svg,[contenteditable],[translate='no'],[data-no-translate],iframe";
   const originals = new WeakMap(), cache = new Map(), pending = new Set(), completed = new WeakSet();
   const MAX_CONCURRENT_REQUESTS = 2;
@@ -52,11 +53,11 @@
     }
   }
   async function translate(source) {
-    const key = language + ":" + source;
+    const key = pageLanguage + ":" + language + ":" + source;
     if (!cache.has(key)) {
       cache.set(key, schedule(() => fetch(API, {
       method: "POST", headers: { "content-type": "application/json" },
-      body: JSON.stringify({ contentId: "auto", sourceText: source, sourceLanguage: "en", targetLanguage: language })
+      body: JSON.stringify({ contentId: "auto", sourceText: source, sourceLanguage: pageLanguage, targetLanguage: language })
     }).then(async r => {
       const body = await r.json().catch(() => ({}));
       return r.ok && (body.status === "translated" || body.status === "cached") && typeof body.text === "string" ? body.text : null;
@@ -68,7 +69,9 @@
     if (pending.has(node) || completed.has(node)) return;
     const source = originals.get(node) || node.textContent;
     if (!source?.trim() || source.length > 800) return;
-    if (node.parentElement?.closest('[lang]:not([lang="en"]), [lang="fr"]')) return; // Existing French passages must remain French.
+    // Preserve inline passages in a language different from the page source.
+    const marked = node.parentElement?.closest("[lang]");
+    if (marked && marked.lang.split("-")[0].toLowerCase() !== pageLanguage) return;
     originals.set(node, source); pending.add(node);
     try {
       const value = await translate(source);
