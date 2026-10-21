@@ -3,12 +3,36 @@ test_missing_title_is_rejected (test_gamma_converter.ConverterTests.test_missing
 test_script_markup_does_not_execute (test_gamma_converter.ConverterTests.test_script_markup_does_not_execute) ... ok
 test_unrelated_source_is_rejected (test_gamma_converter.ConverterTests.test_unrelated_source_is_rejected) ... ok
 test_wrong_english_source_is_rejected (test_gamma_converter.ConverterTests.test_wrong_english_source_is_rejected) ... ok
+test_dry_run_refuses_overwrite (test_gamma_sync_guard.GammaSyncGuardTests.test_dry_run_refuses_overwrite) ... FAIL
 test_missing_authenticated_export_does_not_write (test_gamma_sync_guard.GammaSyncGuardTests.test_missing_authenticated_export_does_not_write) ... ok
 test_path_traversal_rejected (test_gamma_sync_guard.GammaSyncGuardTests.test_path_traversal_rejected) ... ok
 test_sync_enabled_cannot_run_guard (test_gamma_sync_guard.GammaSyncGuardTests.test_sync_enabled_cannot_run_guard) ... ok
 test_unrelated_french_source_rejected (test_gamma_sync_guard.GammaSyncGuardTests.test_unrelated_french_source_rejected) ... ok
+test_valid_english_source_creates_only_dry_run_fragment (test_gamma_sync_guard.GammaSyncGuardTests.test_valid_english_source_creates_only_dry_run_fragment) ... FAIL
+
+======================================================================
+FAIL: test_dry_run_refuses_overwrite (test_gamma_sync_guard.GammaSyncGuardTests.test_dry_run_refuses_overwrite)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/solaire-film-district/solaire-film-district/preview/tools/test_gamma_sync_guard.py", line 52, in test_dry_run_refuses_overwrite
+    self.assertEqual(first[0]["status"],"DRY_RUN_VALIDATED")
+AssertionError: 'REJECTED' != 'DRY_RUN_VALIDATED'
+- REJECTED
++ DRY_RUN_VALIDATED
+
+
+======================================================================
+FAIL: test_valid_english_source_creates_only_dry_run_fragment (test_gamma_sync_guard.GammaSyncGuardTests.test_valid_english_source_creates_only_dry_run_fragment)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/runner/work/solaire-film-district/solaire-film-district/preview/tools/test_gamma_sync_guard.py", line 41, in test_valid_english_source_creates_only_dry_run_fragment
+    self.assertEqual(result[0]["status"],"DRY_RUN_VALIDATED")
+AssertionError: 'REJECTED' != 'DRY_RUN_VALIDATED'
+- REJECTED
++ DRY_RUN_VALIDATED
+
 
 ----------------------------------------------------------------------
-Ran 9 tests in 0.002s
+Ran 11 tests in 0.004s
 
-OK
+FAILED (failures=2)
