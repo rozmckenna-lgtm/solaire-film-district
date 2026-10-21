@@ -4,6 +4,7 @@ on:
     paths:
       - 'preview/tools/staging_gamma_update.py'
       - 'preview/verification/gamma-dry-run/**'
+      - 'preview/tools/staging_gamma_update.py'
       - '.github/workflows/staging-gamma-update-preview.yml'
   workflow_dispatch:
 permissions:
@@ -17,6 +18,7 @@ jobs:
       - name: Generate isolated staged page and diff, never change preview HTML
         shell: bash
         run: |
+          rm -rf preview/verification/gamma-update-review
           mkdir -p preview/verification/gamma-update-review
           set +e
           for name in does-a-story-have-to-be-fast realistic-film-budget; do
