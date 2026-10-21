@@ -19,8 +19,12 @@ with sync_playwright() as pw:
                 text = payload.get("sourceText", "")
                 route.fulfill(status=200, content_type="application/json", headers={"access-control-allow-origin": "*"}, body=json.dumps({"status":"translated","text":"FR_TEST: " + text}))
             page.route("**/functions/v1/translate-website", mock_translation)
-            page.goto(BASE + page_name, wait_until="domcontentloaded", timeout=30000)
+            response = page.goto(BASE + page_name, wait_until="domcontentloaded", timeout=30000)
+            assert response and response.status == 200, f"{device} {page_name}: HTTP {response.status if response else 'no response'}"
             page.wait_for_function("document.body.innerText.includes('FR_TEST:')", timeout=30000)
+            page.wait_for_function("document.title.startsWith('FR_TEST:')", timeout=30000)
+            assert page.locator("script[src=\'automatic-translation.js\']").count() == 1, f"{device} {page_name}: translation script missing or duplicated"
+            assert page.locator("img[src=\'../logo-solaire.jpeg\']").evaluate_all("(images) => images.every(img => img.complete && img.naturalWidth > 0)") if page.locator("img[src=\'../logo-solaire.jpeg\']").count() else True, f"{device} {page_name}: Solaire logo not loaded"
             page.screenshot(path=str(OUT / (device + "-" + page_name.replace(".html", ".png"))), full_page=True)
             assert not errors, f"{device} {page_name}: {errors}"
             assert page.locator("html").get_attribute("lang") == "en", "English source language changed"
