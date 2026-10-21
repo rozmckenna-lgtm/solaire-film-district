@@ -155,3 +155,14 @@ body{background:#0d0d17}
 .district-content .feature,.district-content .card{background-color:#302e46}
 .district-content .topbar{background:#151523f2}
 @media(max-width:1100px){.sidebar-toggle{background:#242339f2}}
+
+/* Exact aubergine sampled from Roz's 22 October website reference screenshot.
+   The large sidebar field is RGB(17,11,16), #110b10; no blue-plum tint. */
+:root{--dark:#0b090c;--wine:#110b10;--smoke:#110b10}
+.district-sidebar{background:#110b10;border-right:1px solid #574638}
+.sidebar-brand{background:#110b10;border-bottom-color:#574638}
+.sidebar-nav a.active{background:#30251f}
+.sidebar-nav a:hover,.sidebar-nav a:focus-visible{background:#292029}
+.sidebar-account{background:#110b10}
+.district-content .topbar{background:#110b10f5}
+@media(max-width:1100px){.sidebar-toggle{background:#110b10f2}}
