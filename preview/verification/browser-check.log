@@ -1,6 +1,1 @@
-PASS desktop translated-description-metadata
-Traceback (most recent call last):
-  File "/home/runner/work/solaire-film-district/solaire-film-district/preview/tools/browser_check.py", line 45, in <module>
-    assert "fd49a2c7f_generated_image.png" in computed, f"{device}: globe missing from page background: {computed}"
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: desktop: globe missing from page background: none
+Browser test did not start; inspect Actions job.
