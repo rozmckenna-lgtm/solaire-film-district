@@ -1,0 +1,25 @@
+{
+  "date": "2026-10-21",
+  "results": [
+    {
+      "article": "does-a-story-have-to-be-fast.html",
+      "stagingTextCharacters": 4652,
+      "authenticatedGammaTextCharacters": 4488,
+      "sourceOpeningMatches": true,
+      "sourceEndingMatches": false,
+      "stagingHeadingCount": 9,
+      "sourceHeadingCount": 9,
+      "conclusion": "Comparison only; no publication or claim of exact content parity."
+    },
+    {
+      "article": "realistic-film-budget.html",
+      "stagingTextCharacters": 6252,
+      "authenticatedGammaTextCharacters": 6101,
+      "sourceOpeningMatches": true,
+      "sourceEndingMatches": true,
+      "stagingHeadingCount": 9,
+      "sourceHeadingCount": 9,
+      "conclusion": "Comparison only; no publication or claim of exact content parity."
+    }
+  ]
+}
