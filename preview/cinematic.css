@@ -166,3 +166,17 @@ body{background:#0d0d17}
 .sidebar-account{background:#110b10}
 .district-content .topbar{background:#110b10f5}
 @media(max-width:1100px){.sidebar-toggle{background:#110b10f2}}
+
+/* Roz's selected colour: Soft Aubergine #503A59 (22 October 2026).
+   Preserve near-black cinematic canvas, use the approved shade on navigation
+   and coordinating surfaces with gold contrast. */
+:root{--smoke:#503A59;--wine:#503A59}
+.district-sidebar{background:linear-gradient(170deg,#503A59 0%,#45334e 60%,#35283d 100%);border-right:1px solid #c9a86d70}
+.sidebar-brand{background:#503A59;border-bottom-color:#c9a86d55}
+.sidebar-nav a.active{background:#382943;border-left-color:var(--gold)}
+.sidebar-nav a:hover,.sidebar-nav a:focus-visible{background:#654a70}
+.sidebar-account{background:#382943}
+.district-content .feature,.district-content .card{background-color:#503A59}
+.district-content .feature-copy{background:linear-gradient(90deg,#503A59ee,#503A59bb 45%,transparent 100%)}
+.district-content .topbar{background:#302339f2}
+@media(max-width:1100px){.sidebar-toggle{background:#503A59f2}}
