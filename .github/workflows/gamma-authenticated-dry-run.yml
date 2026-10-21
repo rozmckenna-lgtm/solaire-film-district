@@ -1,0 +1,35 @@
+name: Validate actual authenticated English Gamma article exports
+on:
+  push:
+    paths:
+      - 'preview/verification/gamma-authenticated-source/**'
+      - 'preview/tools/gamma_sync_guard.py'
+      - 'preview/tools/convert_gamma_article.py'
+      - 'preview/gamma-english-sources.json'
+      - '.github/workflows/gamma-authenticated-dry-run.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Convert authenticated Gamma English source without modifying website
+        shell: bash
+        run: |
+          mkdir -p preview/verification/gamma-dry-run
+          set +e
+          python preview/tools/gamma_sync_guard.py --manifest preview/gamma-english-sources.json --source-dir preview/verification/gamma-authenticated-source --output-dir preview/verification/gamma-dry-run > preview/verification/gamma-authenticated-dry-run.log 2>&1
+          status=$?
+          cat preview/verification/gamma-authenticated-dry-run.log
+          exit "$status"
+      - name: Retain guarded dry-run report and fragments
+        if: always()
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview/verification/gamma-authenticated-dry-run.log preview/verification/gamma-dry-run
+          git diff --cached --quiet || (git commit -m 'Record authenticated Gamma English dry-run conversion evidence [skip ci]' && git push)
