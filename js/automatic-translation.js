@@ -5,7 +5,23 @@
   "use strict";
   const API = "https://titeccsfyanjqmzofjrr.supabase.co/functions/v1/translate-website";
   const language = (navigator.languages?.[0] || navigator.language || "en").split("-")[0].toLowerCase();
-  if (language === "en" || !/^[a-z]{2,3}$/.test(language)) return;
+  if (!/^[a-z]{2,3}$/.test(language)) return;
+  // The source website includes paired English/French passages. Show the
+  // matching source language and hide only a paired duplicate, never an
+  // unmatched passage or a form. Other languages use English as the source.
+  function choosePairedLanguage() {
+    for (const pair of document.querySelectorAll(".bilingual, .hero-intro")) {
+      const en = pair.querySelector(':scope > [lang="en"]');
+      const fr = pair.querySelector(':scope > [lang="fr"]');
+      if (!en || !fr) continue;
+      en.hidden = language === "fr";
+      fr.hidden = language !== "fr";
+    }
+  }
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", choosePairedLanguage, { once: true });
+  } else choosePairedLanguage();
+  if (language === "en") return;
   const protectedSelector = "script,style,noscript,textarea,code,pre,svg,[contenteditable],[translate='no'],[data-no-translate],iframe";
   const originals = new WeakMap(), cache = new Map(), pending = new Set(), completed = new WeakSet();
   const MAX_UNIQUE_REQUESTS = 24; // Limit requests; server budget remains authoritative.
