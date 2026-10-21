@@ -180,3 +180,7 @@ body{background:#0d0d17}
 .district-content .feature-copy{background:linear-gradient(90deg,#503A59ee,#503A59bb 45%,transparent 100%)}
 .district-content .topbar{background:#302339f2}
 @media(max-width:1100px){.sidebar-toggle{background:#503A59f2}}
+
+/* Approved soft aubergine, slightly darkened for dashboard. */
+.district-sidebar{background:#423049}
+.sidebar-brand{background:#423049}
