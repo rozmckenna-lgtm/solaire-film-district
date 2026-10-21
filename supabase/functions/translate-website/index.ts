@@ -8,7 +8,7 @@ const HEADERS = { "access-control-allow-origin": ORIGIN, "access-control-allow-m
 function respond(body: unknown, status = 200) { return new Response(JSON.stringify(body), { status, headers: { ...HEADERS, "content-type": "application/json" } }); }
 async function rpc(secret: string, name: string, data: Record<string, unknown>) {
   const res = await fetch("https://" + PROJECT + ".supabase.co/rest/v1/rpc/" + name, {
-    method: "POST", headers: { apikey: secret, authorization: "Bearer " + secret, "content-type": "application/json" },
+    method: "POST", headers: { apikey: secret, "content-type": "application/json" },
     body: JSON.stringify(data), signal: AbortSignal.timeout(7000)
   });
   if (!res.ok) throw Error("rpc-" + res.status);
