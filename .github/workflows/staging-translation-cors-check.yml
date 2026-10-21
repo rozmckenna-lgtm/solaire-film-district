@@ -1,0 +1,44 @@
+name: Verify cinematic staging translation CORS without paid requests
+on:
+  push:
+    paths:
+      - 'preview/automatic-translation.js'
+      - '.github/workflows/staging-translation-cors-check.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  cors:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check staging preflight and reject other origins, no translation calls
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p preview/verification
+          endpoint='https://titeccsfyanjqmzofjrr.supabase.co/functions/v1/translate-website-staging'
+          staging='https://rozmckenna-lgtm.github.io'
+          code=$(curl -sS -D /tmp/staging-headers -o /dev/null -w '%{http_code}' -X OPTIONS "$endpoint" -H "Origin: $staging" -H 'Access-Control-Request-Method: POST' -H 'Access-Control-Request-Headers: content-type')
+          grep -qi "^access-control-allow-origin: $staging" /tmp/staging-headers
+          test "$code" = 204
+          rejected=$(curl -sS -o /dev/null -w '%{http_code}' -X OPTIONS "$endpoint" -H 'Origin: https://untrusted.example' -H 'Access-Control-Request-Method: POST')
+          test "$rejected" = 403
+          grep -q '/translate-website-staging' preview/automatic-translation.js
+          {
+            echo 'PASS staging OPTIONS 204 and exact allowed origin'
+            echo 'PASS untrusted origin rejected 403'
+            echo 'PASS preview translation JS targets isolated staging function'
+            echo 'NO paid Google translation request performed'
+          } > preview/verification/staging-translation-cors.log
+          cat preview/verification/staging-translation-cors.log
+      - name: Commit non-billable CORS evidence
+        if: always()
+        shell: bash
+        run: |
+          if [ ! -f preview/verification/staging-translation-cors.log ]; then echo 'FAIL: inspect Actions run' > preview/verification/staging-translation-cors.log; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview/verification/staging-translation-cors.log
+          git diff --cached --quiet || (git commit -m 'Record staging translation preflight evidence [skip ci]' && git push)
