@@ -51,3 +51,9 @@ Remove Gamma A/CNAME records only when ready. Preserve all OVH MX, SPF, DKIM, SR
 - Both preview forms retain the existing Formspree endpoint. Neither form has been submitted in a browser; no delivery claim is made.
 - Attempted to open the GitHub Pages cinematic preview in a web reader; it was inaccessible there. Live rendering, image availability, desktop/mobile overflow, and translation are still unverified. Next critical task is accessible rendered staging preview and browser acceptance tests.
 - Preserve rejected root homepage, live DNS and email. Do not resume Gamma automation ahead of preview functionality verification.
+
+## Gamma authenticated read mismatch confirmed across editions — 21 October 2026
+- Re-tested `read_gamma` for the three latest matching English originals: `1iez2py11pb8yrl`, `jb54fepsfow64in`, `5zupllwsm8jzxw5`. All returned the unrelated `COMMENT FINANCER MON FILM ?` content despite Gamma full-text search identifying the requested English documents.
+- Tested alternate older English editions `cy8firr58fbaolp`, `t9iiyx88ybm1ae3`, `g78aa2lk8b6ip4v`; all returned unrelated `Catalogue de projets` content. Repeating `read_gamma` or switching editions is not a valid workaround.
+- Verified one different English Gamma original `g_8sm4qycom0rpyuc` reads with the correct title. This indicates the issue is selective, not proof that all Gamma content is inaccessible.
+- Automatic updates must remain disabled; no source content has been overwritten. Next action is to find a reliable authenticated retrieval route that returns document-specific content before building unattended sync.
