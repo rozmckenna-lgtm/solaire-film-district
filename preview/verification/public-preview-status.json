@@ -1,0 +1,43 @@
+{
+  "base": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/",
+  "results": [
+    {
+      "path": "index.html",
+      "status": 200,
+      "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/index.html",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 7020,
+      "cinematic_html": true,
+      "gamma_error": false
+    },
+    {
+      "path": "cinematic.css",
+      "status": 200,
+      "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/cinematic.css",
+      "content_type": "text/css; charset=utf-8",
+      "bytes": 13128
+    },
+    {
+      "path": "automatic-translation.js",
+      "status": 200,
+      "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/automatic-translation.js",
+      "content_type": "application/javascript; charset=utf-8",
+      "bytes": 5520
+    },
+    {
+      "path": "creator-centre.html",
+      "status": 200,
+      "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/creator-centre.html",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 6906
+    },
+    {
+      "path": "john-malkovich.html",
+      "status": 200,
+      "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/john-malkovich.html",
+      "content_type": "text/html; charset=utf-8",
+      "bytes": 5471
+    }
+  ],
+  "all_ok": true
+}
