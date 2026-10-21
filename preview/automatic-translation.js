@@ -49,7 +49,10 @@
       return r.ok && (body.status === "translated" || body.status === "cached") && typeof body.text === "string" ? body.text : null;
     }).catch(() => null)));
     }
-    return cache.get(key);
+    const result = await cache.get(key);
+    // A transient network/CORS error must not poison the page cache permanently.
+    if (!result) cache.delete(key);
+    return result;
   }
   async function process(node) {
     if (pending.has(node) || completed.has(node)) return;
@@ -63,7 +66,7 @@
     try {
       const value = await translate(source);
       if (value && node.isConnected && node.nodeValue === source) node.nodeValue = value;
-      completed.add(node);
+      if (value) completed.add(node);
     } finally { pending.delete(node); }
   }
   // Translate visitor-facing attributes as well as visible text.
@@ -80,6 +83,7 @@
       if (!original || original.trim().length < 2 || original.length > 800) continue;
       seen.add(attribute);
       const translated = await translate(original);
+      if (!translated) seen.delete(attribute);
       if (translated && element.isConnected && element.getAttribute(attribute) === original)
         element.setAttribute(attribute, translated);
     }
