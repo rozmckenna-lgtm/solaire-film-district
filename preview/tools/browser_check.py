@@ -36,6 +36,17 @@ with sync_playwright() as pw:
                 # so it continues behind the project cards; the hero overlays gradients.
                 computed = page.locator("body").evaluate("(el) => getComputedStyle(el).backgroundImage")
                 assert "fd49a2c7f_generated_image.png" in computed, f"{device}: globe missing from page background: {computed}"
+                # Verify five downloadable guides actually resolve, not merely that links exist.
+                pdf_links = page.locator('a[href$=".pdf"]').evaluate_all("(els) => [...new Set(els.map(a => a.href))]")
+                assert len(pdf_links) == 5, f"{device}: expected 5 PDFs, found {len(pdf_links)}"
+                for pdf_url in pdf_links:
+                    pdf = page.request.get(pdf_url, timeout=15000)
+                    assert pdf.ok and pdf.body().startswith(b"%PDF-"), f"{device}: invalid PDF {pdf_url} ({pdf.status})"
+                # Verify every local HTML navigation target resolves.
+                internal_links = page.locator('a[href]').evaluate_all("""(els) => [...new Set(els.map(a => a.href).filter(u => u.startsWith(location.origin) && /\\.html(?:#.*)?$/.test(u)))]""")
+                for target in internal_links:
+                    nav = page.request.get(target.split("#")[0], timeout=15000)
+                    assert nav.ok, f"{device}: broken local navigation {target} ({nav.status})"
                 image = page.request.get("https://media.base44.com/images/public/6ad768462ea55ab133e15a41/fd49a2c7f_generated_image.png", timeout=20000)
                 assert image.ok and image.headers.get("content-type", "").startswith("image/"), f"{device}: globe asset unavailable: {image.status}"
             page.screenshot(path=str(OUT / (device + "-" + page_name.replace(".html", ".png"))), full_page=True)
