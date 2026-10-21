@@ -143,12 +143,15 @@ img,video{max-width:100%}
 }
 @media(prefers-reduced-motion:reduce){.district-sidebar,.sidebar-backdrop{transition:none}}
 
-/* PitchUp app-inspired smoky aubergine; retain original Solaire artwork. */
-:root{--dark:#0b090e;--wine:#302438;--smoke:#34283b}
-.district-sidebar{background:linear-gradient(165deg,#2d2134 0%,#1b1521 35%,#0c0a10 100%);border-right-color:#ac8a5a66}
-.sidebar-nav a.active{background:#382b42}
-.sidebar-nav a:hover,.sidebar-nav a:focus-visible{background:#403149}
+/* Smoky plum: blue-violet charcoal, not burgundy, magenta or pink. */
+:root{--dark:#0d0d17;--wine:#242335;--smoke:#302e46}
+body{background:#0d0d17}
+.district-sidebar{background:linear-gradient(165deg,#302e46 0%,#222235 43%,#11121f 100%);border-right-color:#aa936e66}
+.sidebar-nav a.active{background:#3a3853}
+.sidebar-nav a:hover,.sidebar-nav a:focus-visible{background:#41405c}
 .sidebar-brand{background:transparent}
 .sidebar-brand img,.district-content .brand-logo{mix-blend-mode:screen}
-.district-content .feature,.district-content .card{background-color:#302438}
-.sidebar-account{background:#302438}
+.sidebar-account{background:#302e46}
+.district-content .feature,.district-content .card{background-color:#302e46}
+.district-content .topbar{background:#151523f2}
+@media(max-width:1100px){.sidebar-toggle{background:#242339f2}}
