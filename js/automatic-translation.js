@@ -23,7 +23,7 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", choosePairedLanguage, { once: true });
   } else choosePairedLanguage();
-  if (language === "en" || language === "fr") return;
+  if (language === "en") return;
   const protectedSelector = "script,style,noscript,textarea,code,pre,svg,[contenteditable],[translate='no'],[data-no-translate],iframe";
   const originals = new WeakMap(), cache = new Map(), pending = new Set(), completed = new WeakSet();
   const MAX_CONCURRENT_REQUESTS = 2;
