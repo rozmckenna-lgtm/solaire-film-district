@@ -22,3 +22,8 @@ body{background:#170a10}
 .footer{background:#220d17}
 @media(max-width:1080px){.topbar{gap:16px}.hero{min-height:560px}.feature img{height:260px}}
 @media(max-width:720px){.topbar{padding:17px 20px}.brand{font-size:22px}.nav{gap:13px}.hero{min-height:530px;background-position:center,center,62% center}.hero h1{font-size:clamp(48px,12vw,72px)}.hero-inner{padding:75px 0 90px}.explore{padding:45px 20px 70px}.feature img{height:225px}.footer{padding:30px 20px}}
+
+/* Use the existing brand artwork instead of a placeholder sun glyph. */
+.brand-logo{display:block;width:clamp(180px,18vw,265px);max-height:65px;object-fit:contain;object-position:left center}
+.footer-logo{display:block;width:220px;max-height:68px;object-fit:contain;object-position:left center}
+@media(max-width:720px){.brand-logo{width:190px;max-height:54px}.footer-logo{width:180px}}
