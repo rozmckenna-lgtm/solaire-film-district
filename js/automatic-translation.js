@@ -26,10 +26,8 @@
   if (language === "en" || language === "fr") return;
   const protectedSelector = "script,style,noscript,textarea,code,pre,svg,[contenteditable],[translate='no'],[data-no-translate],iframe";
   const originals = new WeakMap(), cache = new Map(), pending = new Set(), completed = new WeakSet();
-  const MAX_UNIQUE_REQUESTS = 24; // Limit requests; server budget remains authoritative.
-  const MAX_SOURCE_CHARACTERS = 2500; // Conservative per-page ceiling (backend reserves 3x).
   const MAX_CONCURRENT_REQUESTS = 2;
-  const queue = []; let active = 0, scheduledCharacters = 0;
+  const queue = []; let active = 0;
   const textNodes = () => {
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     const nodes = []; let node;
@@ -56,8 +54,6 @@
   async function translate(source) {
     const key = language + ":" + source;
     if (!cache.has(key)) {
-      if (cache.size >= MAX_UNIQUE_REQUESTS || scheduledCharacters + [...source].length > MAX_SOURCE_CHARACTERS) return null;
-      scheduledCharacters += [...source].length;
       cache.set(key, schedule(() => fetch(API, {
       method: "POST", headers: { "content-type": "application/json" },
       body: JSON.stringify({ contentId: "auto", sourceText: source, sourceLanguage: "en", targetLanguage: language })
