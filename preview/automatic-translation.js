@@ -29,9 +29,15 @@
   const queue = []; let active = 0;
   // Decode Google Translate HTML entities as text, never as markup.
   function decodeTranslatedText(value) {
-    const textarea = document.createElement("textarea");
-    textarea.innerHTML = value;
-    return textarea.value;
+    const named = { amp: "&", quot: '"', apos: "'", lt: "<", gt: ">", nbsp: " " };
+    return value.replace(/&(#x[0-9a-f]+|#[0-9]+|amp|quot|apos|lt|gt|nbsp);/gi, (entity, code) => {
+      if (code[0] === "#") {
+        const numeric = code[1].toLowerCase() === "x" ? parseInt(code.slice(2), 16) : parseInt(code.slice(1), 10);
+        return numeric > 0 && numeric <= 0x10ffff && !(numeric >= 0xd800 && numeric <= 0xdfff)
+          ? String.fromCodePoint(numeric) : entity;
+      }
+      return named[code.toLowerCase()] ?? entity;
+    });
   }
   const textNodes = () => {
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
