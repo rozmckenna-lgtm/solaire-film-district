@@ -1,0 +1,24 @@
+[
+  {
+    "article": "distracted-audience.html",
+    "status": "SKIPPED_UNVERIFIED"
+  },
+  {
+    "article": "does-a-story-have-to-be-fast.html",
+    "status": "DRY_RUN_VALIDATED",
+    "bytes": 4876
+  },
+  {
+    "article": "john-malkovich.html",
+    "status": "SKIPPED_UNVERIFIED"
+  },
+  {
+    "article": "realistic-film-budget.html",
+    "status": "DRY_RUN_VALIDATED",
+    "bytes": 7196
+  },
+  {
+    "article": "screenplay-baby.html",
+    "status": "SKIPPED_UNVERIFIED"
+  }
+]
