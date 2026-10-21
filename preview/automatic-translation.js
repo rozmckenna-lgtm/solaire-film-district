@@ -3,7 +3,9 @@
    No language picker, login, or third-party scripts. */
 (() => {
   "use strict";
-  const API = "https://titeccsfyanjqmzofjrr.supabase.co/functions/v1/translate-website-staging";
+  const API_BASE = "https://titeccsfyanjqmzofjrr.supabase.co/functions/v1/";
+  const isProduction = ["solairefilmdistrict.fr", "www.solairefilmdistrict.fr"].includes(location.hostname);
+  const API = API_BASE + (isProduction ? "translate-website" : "translate-website-staging");
   const language = (navigator.languages?.[0] || navigator.language || "en").split("-")[0].toLowerCase();
   if (!/^[a-z]{2,3}$/.test(language)) return;
   // Staging uses English as the sole canonical source. Never reveal legacy French duplicates.
