@@ -6,6 +6,7 @@ Gamma URL. This script never writes to existing website articles.
 """
 import argparse
 import html
+import re
 from html.parser import HTMLParser
 from pathlib import Path
 
@@ -36,11 +37,11 @@ class Extract(HTMLParser):
     def handle_data(self,data):
         if self.depth>0:self.out.append(html.escape(data))
 def convert(raw):
-    start=raw.find("<div><section")
+    # Fail closed if the authenticated response is not an English article.\n    title_match = re.search(r"(?m)^Title:\\s*(.+)$", raw)\n    if title_match and (title_match.group(1).strip().upper().startswith("COMMENT FINANCER MON FILM") or not title_match.group(1).strip()):\n        raise ValueError("Unrelated or invalid Gamma source title")\n    start=raw.find("<div><section")
     if start<0: raise ValueError("Gamma article sections not found")
     p=Extract();p.feed(raw[start:])
     out="".join(p.out)
-    if p.title_count<1 or len(out)<500: raise ValueError("Missing article title or unexpectedly short content")
+    if p.title_count<1 or len(out)<500: raise ValueError("Missing article title or unexpectedly short content")\n    if re.search(r"(?i)<script|<iframe|javascript:", out):\n        raise ValueError("Unsafe HTML in generated article")
     return '<article class="gamma-english-article" lang="en">\n'+out+'\n</article>\n'
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("input");ap.add_argument("--output",required=True)
