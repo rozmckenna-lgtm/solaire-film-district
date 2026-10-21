@@ -44,6 +44,7 @@
     "url": "https://media.base44.com/images/public/6ad768462ea55ab133e15a41/fd49a2c7f_generated_image.png",
     "status": 200,
     "content_type": "image/png",
-    "png_signature": false
+    "png_signature": false,
+    "first_bytes_hex": "ffd8ffe000104a464946000101000001"
   }
 }
