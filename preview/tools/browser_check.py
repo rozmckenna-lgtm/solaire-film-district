@@ -62,4 +62,31 @@ with sync_playwright() as pw:
             print("PASS", device, page_name)
             page.close()
         context.close()
+    # Real browser behaviour with a mocked provider: an Arabic visitor must
+    # retain readable English/LTR when translation fails, and switch to
+    # Arabic/RTL only when a translated text node actually appears.
+    for outcome in ("failure", "success"):
+        context = browser.new_context(locale="ar-SA", viewport={"width": 390, "height": 844})
+        page = context.new_page()
+        page.on("pageerror", lambda e: (_ for _ in ()).throw(AssertionError(str(e))))
+        def arabic_response(route):
+            if outcome == "failure":
+                route.fulfill(status=503, content_type="application/json", body='{"error":"unavailable"}')
+            else:
+                payload = route.request.post_data_json or {}
+                route.fulfill(status=200, content_type="application/json",
+                              body=json.dumps({"status":"translated","text":"AR_TEST: " + payload.get("sourceText", "")}))
+        page.route("**/functions/v1/translate-website-staging", arabic_response)
+        page.goto(BASE + "thank-you.html", wait_until="domcontentloaded")
+        if outcome == "success":
+            page.wait_for_function("document.body.innerText.includes('AR_TEST:')", timeout=30000)
+            assert page.locator("html").get_attribute("lang") == "ar"
+            assert page.locator("html").get_attribute("dir") == "rtl"
+        else:
+            page.wait_for_timeout(2000)
+            assert page.locator("html").get_attribute("lang") == "en"
+            assert page.locator("html").get_attribute("dir") != "rtl"
+            assert "AR_TEST:" not in page.locator("body").inner_text()
+        print("PASS arabic-translation-" + outcome + "-direction", flush=True)
+        context.close()
     browser.close()
