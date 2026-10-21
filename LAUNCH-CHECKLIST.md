@@ -39,3 +39,8 @@ Remove Gamma A/CNAME records only when ready. Preserve all OVH MX, SPF, DKIM, SR
 - Authenticated Gamma reads of three previously proposed article IDs (`1iez2py11pb8yrl`, `jb54fepsfow64in`, `5zupllwsm8jzxw5`) returned the unrelated document **COMMENT FINANCER MON FILM ?**. These IDs are blocked in `preview/gamma-english-sources.json`; never use them for article updates.
 - Two other source records have matching English titles. Automatic Gamma sync remains disabled pending verified canonical sources and authenticated scheduled retrieval. No original website articles were changed.
 - Next: locate the correct three original English Gamma documents, then implement a guarded update process with validation and rollback before enabling automation.
+
+## English Gamma discovery — 21 October 2026
+- Gamma full-text search identified all five English article documents, including three with multiple English editions. The earlier read_gamma mismatch must not be interpreted as evidence that those English articles are French.
+- Source registry corrected in commit `a1eec8746b820b609f79108609c8af79cf24ed13`. Automatic sync remains disabled until canonical editions, scheduled authentication and safe updates are confirmed.
+- Five converter safety tests executed locally and passed. This does not verify end-to-end sync.
