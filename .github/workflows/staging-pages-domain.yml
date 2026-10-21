@@ -1,0 +1,58 @@
+name: Verify and detach GitHub Pages staging domain
+on:
+  push:
+    paths:
+      - '.github/workflows/staging-pages-domain.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+  pages: write
+jobs:
+  pages-domain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect and safely detach old production custom domain
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p preview/verification
+          API="https://api.github.com/repos/$REPOSITORY/pages"
+          curl --fail-with-body -sS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$API" > /tmp/pages-before.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/pages-before.json'))
+          print('Before: html_url=',d.get('html_url'),' cname=',d.get('cname'),' status=',d.get('status'))
+          PY
+          CNAME=$(python -c "import json; print(json.load(open('/tmp/pages-before.json')).get('cname') or '')")
+          if [ "$CNAME" = "solairefilmdistrict.fr" ]; then
+            curl --fail-with-body -sS -X PUT -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" -H "Content-Type: application/json" -d '{"cname":null}' "$API" > /tmp/pages-update.json
+            echo "Detached old production custom domain in Pages settings."
+          elif [ -n "$CNAME" ]; then
+            echo "Unexpected custom domain present: $CNAME; leaving it untouched."
+          else
+            echo "No custom domain in Pages settings."
+          fi
+          curl --fail-with-body -sS -H "Authorization: Bearer $GH_TOKEN" -H "Accept: application/vnd.github+json" "$API" > /tmp/pages-after.json
+          python - <<'PY'
+          import json
+          d=json.load(open('/tmp/pages-after.json'))
+          safe={k:d.get(k) for k in ('html_url','cname','status','source','build_type','https_enforced')}
+          with open('preview/verification/pages-status.json','w') as f: json.dump(safe,f,indent=2)
+          print('After:',safe)
+          PY
+      - name: Record Pages status for GitHub connector
+        if: always()
+        run: |
+          mkdir -p preview/verification
+          if [ ! -f preview/verification/pages-status.json ]; then
+            printf '{"error":"Pages status request failed; inspect Actions job logs"}\n' > preview/verification/pages-status.json
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add preview/verification/pages-status.json
+          git diff --cached --quiet || (git commit -m 'Record GitHub Pages staging domain status [skip ci]' && git push)
