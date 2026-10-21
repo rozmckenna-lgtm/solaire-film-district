@@ -65,6 +65,32 @@ with sync_playwright() as pw:
             print("PASS", device, page_name)
             page.close()
         context.close()
+    # Verify actual form-submit handling without sending a real Letter of Intent.
+    for outcome in ("failure", "success"):
+        context = browser.new_context(viewport={"width": 390, "height": 844}, locale="en-GB")
+        page = context.new_page()
+        requests = []
+        def formspree_mock(route):
+            requests.append(route.request.method)
+            route.fulfill(status=200 if outcome == "success" else 422,
+                          content_type="application/json",
+                          headers={"access-control-allow-origin": "*"},
+                          body='{"ok":true}' if outcome == "success" else '{"error":"test rejection"}')
+        page.route("https://formspree.io/f/xwvkjpaz", formspree_mock)
+        page.goto(BASE + "loi.html", wait_until="domcontentloaded")
+        page.locator("#org-name").fill("Solaire Test Organisation")
+        page.locator("#contact-name").fill("Solaire Test")
+        page.locator("#contact-email").fill("test@example.invalid")
+        page.locator('button[type="submit"]').click()
+        if outcome == "success":
+            page.wait_for_url(BASE + "thank-you.html", timeout=10000)
+        else:
+            page.locator("#loi-form-status").get_by_text("could not be submitted", exact=False).wait_for(timeout=10000)
+            assert page.url.endswith("/loi.html"), "Failed submission must not show confirmation"
+            assert page.locator('button[type="submit"]').is_enabled(), "Failed submission must permit retry"
+        assert requests == ["POST"], "Form submission must send one POST only"
+        print("PASS loi-mocked-submit-" + outcome, flush=True)
+        context.close()
     # Real browser behaviour with a mocked provider: an Arabic visitor must
     # retain readable English/LTR when translation fails, and switch to
     # Arabic/RTL only when a translated text node actually appears.
