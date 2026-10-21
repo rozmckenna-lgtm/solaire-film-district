@@ -1,5 +1,5 @@
 /* Solaire Film District — automatic browser-language translation (static GitHub Pages).
-   Production API endpoint is deliberately unset until the secured backend is deployed.
+   Uses the secured production Supabase Edge Function endpoint.
    No language picker, login, or third-party scripts. */
 (() => {
   "use strict";
@@ -37,7 +37,8 @@
     originals.set(node, source); pending.add(node);
     try {
       const value = await translate(source);
-      if (value && node.isConnected && node.textContent === source) node.textContent = value;\n      completed.add(node);
+      if (value && node.isConnected && node.textContent === source) node.textContent = value;
+      completed.add(node);
     } finally { pending.delete(node); }
   }
   let queued = false;
