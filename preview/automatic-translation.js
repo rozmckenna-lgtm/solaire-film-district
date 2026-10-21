@@ -143,7 +143,13 @@
         Promise.all(elements.map(prepareAttributes))
       ]);
       // Never show a half-translated page. On any failure retain the English original.
-      if (texts.some((item, i) => !item && !completed.has(nodes[i]))) return;
+      if (texts.some((item, i) => !item && !completed.has(nodes[i]))) {
+        // Attributes were prepared but not displayed. Allow retry with a later batch.
+        for (const group of attrs) for (const {element, attribute} of group) {
+          attributeDone.get(element)?.delete(attribute);
+        }
+        return;
+      }
       const changes = texts.filter(Boolean);
       // All visible text updates are synchronous, so the browser paints one language.
       for (const {node, source, value} of changes) {
