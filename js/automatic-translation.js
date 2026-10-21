@@ -16,6 +16,8 @@
       if (!en || !fr) continue;
       en.hidden = language === "fr";
       fr.hidden = language !== "fr";
+      en.style.setProperty("display", language === "fr" ? "none" : "", language === "fr" ? "important" : "");
+      fr.style.setProperty("display", language !== "fr" ? "none" : "", language !== "fr" ? "important" : "");
     }
   }
   if (document.readyState === "loading") {
