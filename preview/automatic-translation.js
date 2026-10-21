@@ -106,6 +106,16 @@
       const translated = await translate(originalTitle);
       if (translated && document.title === originalTitle) document.title = translated;
     }
+    // The document description is shown in browser previews and assistive tools.
+    // Do not modify canonical URLs, Open Graph URLs or English source files.
+    for (const selector of ['meta[name="description"]', 'meta[property="og:description"]']) {
+      const element = document.querySelector(selector);
+      const original = element?.getAttribute("content");
+      if (!original || original.trim().length < 2 || original.length > 800) continue;
+      const translated = await translate(original);
+      if (translated && element.isConnected && element.getAttribute("content") === original)
+        element.setAttribute("content", translated);
+    }
   }
   void translateDocumentMetadata();
   let queued = false;
