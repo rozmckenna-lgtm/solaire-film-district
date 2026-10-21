@@ -45,7 +45,7 @@ jobs:
               req=urllib.request.Request(globe_url,headers={"User-Agent":"Mozilla/5.0"})
               with urllib.request.urlopen(req,timeout=20) as res:
                   data=res.read(32)
-                  globe.update({"status":res.status,"content_type":res.headers.get("Content-Type"),"png_signature":data.startswith(bytes.fromhex("89504e470d0a1a0a"))})
+                  globe.update({"status":res.status,"content_type":res.headers.get("Content-Type"),"png_signature":data.startswith(bytes.fromhex("89504e470d0a1a0a")),"first_bytes_hex":data[:16].hex()})
           except Exception as exc:
               globe["error"]=str(exc)[:240]
           report["globe_asset"]=globe
