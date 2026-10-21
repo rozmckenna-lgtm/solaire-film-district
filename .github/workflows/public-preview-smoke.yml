@@ -39,6 +39,16 @@ jobs:
                       result["error"]=str(exc)[:240]
                       if attempt<3: time.sleep(15)
               report["results"].append(result)
+          globe_url="https://media.base44.com/images/public/6ad768462ea55ab133e15a41/fd49a2c7f_generated_image.png"
+          globe={"url":globe_url}
+          try:
+              req=urllib.request.Request(globe_url,headers={"User-Agent":"Mozilla/5.0"})
+              with urllib.request.urlopen(req,timeout=20) as res:
+                  data=res.read(32)
+                  globe.update({"status":res.status,"content_type":res.headers.get("Content-Type"),"png_signature":data.startswith(bytes.fromhex("89504e470d0a1a0a"))})
+          except Exception as exc:
+              globe["error"]=str(exc)[:240]
+          report["globe_asset"]=globe
           report["all_ok"]=all(r.get("status")==200 and (r.get("cinematic_html",True)) and not r.get("gamma_error",False) for r in report["results"])
           Path("preview/verification/public-preview-status.json").write_text(json.dumps(report,indent=2)+"\n")
           print(json.dumps(report,indent=2))
