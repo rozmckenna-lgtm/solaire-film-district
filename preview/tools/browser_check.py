@@ -57,7 +57,7 @@ with sync_playwright() as pw:
                 assert image.ok and image.headers.get("content-type", "").startswith("image/"), f"{device}: globe asset unavailable: {image.status}"
             page.screenshot(path=str(OUT / (device + "-" + page_name.replace(".html", ".png"))), full_page=True)
             assert not errors, f"{device} {page_name}: {errors}"
-            assert page.locator("html").get_attribute("lang") == "en", "English source language changed"
+            assert page.locator("html").get_attribute("lang") == "fr", "Translated page must declare visitor language for screen readers"
             assert page.locator("body").evaluate("(el) => el.scrollWidth <= window.innerWidth + 3"), f"{device} horizontal overflow: {page_name}"
             print("PASS", device, page_name)
             page.close()
