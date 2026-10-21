@@ -1,0 +1,11 @@
+{
+  "html_url": "https://rozmckenna-lgtm.github.io/solaire-film-district/",
+  "cname": null,
+  "status": "building",
+  "source": {
+    "branch": "main",
+    "path": "/"
+  },
+  "build_type": "legacy",
+  "https_enforced": true
+}
