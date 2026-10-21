@@ -39,14 +39,18 @@ class Extract(HTMLParser):
 def convert(raw, expected_title=None):
     # Fail closed if the authenticated response is not an English article.
     title_match = re.search(r"(?m)^Title:\\s*(.+)$", raw)
-    if title_match and (title_match.group(1).strip().upper().startswith("COMMENT FINANCER MON FILM") or not title_match.group(1).strip()):\n        raise ValueError("Unrelated or invalid Gamma source title")
-    if expected_title:\n        if not title_match or title_match.group(1).strip().casefold() != expected_title.strip().casefold():\n            raise ValueError("Gamma title does not match the expected English original")
+    if title_match and (title_match.group(1).strip().upper().startswith("COMMENT FINANCER MON FILM") or not title_match.group(1).strip()):
+        raise ValueError("Unrelated or invalid Gamma source title")
+    if expected_title:
+        if not title_match or title_match.group(1).strip().casefold() != expected_title.strip().casefold():
+            raise ValueError("Gamma title does not match the expected English original")
     start=raw.find("<div><section")
     if start<0: raise ValueError("Gamma article sections not found")
     p=Extract();p.feed(raw[start:])
     out="".join(p.out)
     if p.title_count<1 or len(out)<500: raise ValueError("Missing article title or unexpectedly short content")
-    if re.search(r"(?i)<script|<iframe|javascript:", out):\n        raise ValueError("Unsafe HTML in generated article")
+    if re.search(r"(?i)<script|<iframe|javascript:", out):
+        raise ValueError("Unsafe HTML in generated article")
     return '<article class="gamma-english-article" lang="en">\n'+out+'\n</article>\n'
 def main():
     ap=argparse.ArgumentParser();ap.add_argument("input");ap.add_argument("--output",required=True)
