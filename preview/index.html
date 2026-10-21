@@ -27,6 +27,26 @@
   </nav>
   <a class="account" href="https://solaire-pitchup.base44.app/login">Create Account <span aria-hidden="true">↗</span></a>
 </header>
+<button class="sidebar-toggle" type="button" aria-controls="district-sidebar" aria-expanded="false" aria-label="Open website navigation">☰ <span>Menu</span></button>
+<aside class="district-sidebar" id="district-sidebar" aria-label="Solaire Film District sections">
+  <a class="sidebar-brand" href="index.html"><img src="../logo-solaire.jpeg" alt="Solaire Film District"></a>
+  <nav class="sidebar-nav" aria-label="District navigation">
+    <a class="active" href="index.html" aria-current="page">Home</a>
+    <a href="#explore">Explore the District</a>
+    <a href="creators.html">For Creators</a>
+    <a href="decision-makers.html">For Industry</a>
+    <a href="pitchup.html">How PitchUp Works</a>
+    <a href="creator-centre.html">Creator Centre</a>
+    <a href="#articles">Articles</a>
+    <a href="#resource-heading">Practical Resources</a>
+    <a href="#about">About Solaire</a>
+    <a href="loi.html">Letter of Intent</a>
+    <a href="mailto:contact@solairefilmdistrict.fr">Contact</a>
+  </nav>
+  <a class="sidebar-account" href="https://solaire-pitchup.base44.app/login">Create a PitchUp Account ↗</a>
+</aside>
+<div class="sidebar-backdrop" aria-hidden="true"></div>
+<div class="district-content">
 <main id="main">
 <section class="hero">
   <div class="hero-inner">
@@ -92,5 +112,24 @@
 </section>
 </main>
 <footer class="footer"><div><img class="footer-logo" src="../logo-solaire.jpeg" alt="Solaire Film District"><p>Occitanie, France</p></div><div><a href="mailto:contact@solairefilmdistrict.fr">contact@solairefilmdistrict.fr</a><p>© 2026 Silver Road Media SAS</p></div></footer>
+</div>
 <script src="automatic-translation.js" defer></script>
+<script>
+(function () {
+  const toggle = document.querySelector('.sidebar-toggle');
+  const sidebar = document.querySelector('.district-sidebar');
+  const backdrop = document.querySelector('.sidebar-backdrop');
+  if (!toggle || !sidebar || !backdrop) return;
+  const close = () => { document.body.classList.remove('sidebar-open'); toggle.setAttribute('aria-expanded', 'false'); toggle.setAttribute('aria-label', 'Open website navigation'); };
+  toggle.addEventListener('click', () => {
+    const open = document.body.classList.toggle('sidebar-open');
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Close website navigation' : 'Open website navigation');
+  });
+  backdrop.addEventListener('click', close);
+  sidebar.addEventListener('click', event => { if (event.target.closest('a')) close(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape') close(); });
+  window.matchMedia('(min-width: 1101px)').addEventListener('change', close);
+})();
+</script>
 </body></html>
