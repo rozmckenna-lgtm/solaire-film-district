@@ -27,3 +27,24 @@ body{background:#170a10}
 .brand-logo{display:block;width:clamp(180px,18vw,265px);max-height:65px;object-fit:contain;object-position:left center}
 .footer-logo{display:block;width:220px;max-height:68px;object-fit:contain;object-position:left center}
 @media(max-width:720px){.brand-logo{width:190px;max-height:54px}.footer-logo{width:180px}}
+
+
+/* Match approved cinematic reference's landscape image-cards, without French duplicates. */
+.hero{min-height:440px;align-items:flex-start;background-position:center,center,center 42%}
+.hero-inner{padding:55px 0 40px}
+.hero h1{font-size:clamp(56px,6.4vw,92px);margin:13px 0 12px;max-width:690px}
+.hero-intro{margin-bottom:8px;max-width:640px}
+.explore{position:relative;margin-top:-4px;padding:24px clamp(20px,4vw,65px) 72px;background:linear-gradient(180deg,#1a0b12ee,#2c101bcf 75%,#1a0b12)}
+.section-eyebrow{margin-bottom:20px}
+.cards{max-width:1440px;gap:22px}
+.feature{position:relative;min-height:315px;display:flex;align-items:stretch;isolation:isolate;border:1px solid #d7b46dbd;border-radius:12px;background:#28131c;overflow:hidden}
+.feature img{position:absolute;inset:0 0 0 auto;width:64%;height:100%;object-fit:cover;object-position:center;z-index:-2}
+.feature::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#25121ff7 0%,#291522f0 43%,#29152280 69%,#29152208 100%);z-index:-1}
+.feature-copy{width:100%;padding:24px 28px 26px;background:none;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+.feature h2{font-size:clamp(27px,2.6vw,41px);line-height:1.1;margin:7px 0 10px;color:#f6e9d8}
+.feature-copy>p:not(.eyebrow){max-width:58%;min-height:0;margin:4px 0;font-size:13px;line-height:1.65}
+.feature .eyebrow{max-width:58%;font-size:9px}
+.actions{max-width:65%;margin-top:18px;gap:8px}
+.actions a{padding:10px 13px;font-size:10px;background:#1e1019a8}
+@media(max-width:1080px){.hero{min-height:410px}.feature{min-height:300px}.feature img{width:70%}.feature-copy>p:not(.eyebrow){max-width:64%}}
+@media(max-width:720px){.hero{min-height:435px}.hero-inner{padding:55px 0 35px}.hero h1{font-size:clamp(45px,11vw,69px)}.explore{padding:30px 16px 65px}.cards{grid-template-columns:1fr;gap:16px}.feature{min-height:300px}.feature img{width:100%;object-position:65% center}.feature::before{background:linear-gradient(90deg,#24121ff7 0%,#291522e6 51%,#29152270 100%)}.feature-copy{padding:23px 20px}.feature-copy>p:not(.eyebrow),.feature .eyebrow{max-width:75%}.actions{max-width:85%}.feature h2{font-size:30px}}
