@@ -23,7 +23,7 @@
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", choosePairedLanguage, { once: true });
   } else choosePairedLanguage();
-  if (language === "en") return;
+  if (language === "en" || language === "fr") return;
   const protectedSelector = "script,style,noscript,textarea,code,pre,svg,[contenteditable],[translate='no'],[data-no-translate],iframe";
   const originals = new WeakMap(), cache = new Map(), pending = new Set(), completed = new WeakSet();
   const MAX_UNIQUE_REQUESTS = 24; // Limit requests; server budget remains authoritative.
@@ -34,7 +34,7 @@
     const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
     const nodes = []; let node;
     while ((node = walker.nextNode())) {
-      if (!node.parentElement || node.parentElement.closest(protectedSelector)) continue;
+      if (!node.parentElement || node.parentElement.closest(protectedSelector) || node.parentElement.closest("[hidden]")) continue;
       const value = node.textContent;
       if (value.trim().length >= 2 && value.length <= 800) nodes.push(node);
     }
@@ -76,7 +76,7 @@
     originals.set(node, source); pending.add(node);
     try {
       const value = await translate(source);
-      if (value && node.isConnected && node.textContent === source) node.textContent = value;
+      if (value && node.isConnected && node.nodeValue === source) node.nodeValue = value;
       completed.add(node);
     } finally { pending.delete(node); }
   }
