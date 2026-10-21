@@ -178,6 +178,14 @@
     </div>
   </footer>
 
+  <script>
+    // Keep the thank-you redirect on the same verified website host at staging
+    // and after an approved production launch. No form submission is made here.
+    (() => {
+      const redirect = document.querySelector('form[action="https://formspree.io/f/xwvkjpaz"] input[name="_next"]');
+      if (redirect) redirect.value = new URL("thank-you.html", location.href).href;
+    })();
+  </script>
   <script src="automatic-translation.js" defer></script>
 </body>
 </html>
