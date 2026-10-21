@@ -184,3 +184,15 @@ body{background:#0d0d17}
 /* Approved soft aubergine, slightly darkened for dashboard. */
 .district-sidebar{background:#423049}
 .sidebar-brand{background:#423049}
+
+/* Gold wordmark without any image rectangle. */
+.gold-logo{display:inline-flex;align-items:center;gap:11px;color:#d7b46d;line-height:1;white-space:nowrap}
+.gold-sun{font-family:Georgia,serif;font-size:56px;font-weight:400;line-height:.8;color:#d7b46d}
+.gold-words{display:flex;flex-direction:column;gap:7px;align-items:flex-start}
+.gold-words strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:clamp(26px,2.5vw,37px);font-weight:500;letter-spacing:.11em}
+.gold-words small{font-family:Inter,Arial,sans-serif;font-size:10px;letter-spacing:.33em}
+.sidebar-brand .gold-sun{font-size:42px}
+.sidebar-brand .gold-words strong{font-size:28px}
+.sidebar-brand .gold-words small{font-size:8px}
+.footer .gold-words strong{font-size:30px}
+@media(max-width:560px){.topbar .gold-sun{font-size:32px}.topbar .gold-words strong{font-size:22px}.topbar .gold-words small{font-size:7px}}
