@@ -8,8 +8,9 @@
       "localPath": "distracted-audience.html",
       "gammaId": "1iez2py11pb8yrl",
       "gammaUrl": "https://gamma.app/docs/Screenwriting-for-Distracted-Writers-1iez2py11pb8yrl",
-      "status": "English original candidate confirmed by Gamma full-text search; multiple English versions exist, canonical edition not yet established",
-      "verifiedCanonical": false
+      "status": "Latest matching English-title Gamma search result; candidate only, canonical status unverified",
+      "verifiedCanonical": false,
+      "gammaLastSeenUpdated": "2026-09-07T15:18:46.690Z"
     },
     {
       "localPath": "does-a-story-have-to-be-fast.html",
@@ -22,8 +23,9 @@
       "localPath": "john-malkovich.html",
       "gammaId": "jb54fepsfow64in",
       "gammaUrl": "https://gamma.app/docs/John-Malkovich-Distinct-Character-Dialogue-jb54fepsfow64in",
-      "status": "English original candidate confirmed by Gamma full-text search; multiple English versions exist, canonical edition not yet established",
-      "verifiedCanonical": false
+      "status": "Latest matching English-title Gamma search result; candidate only, canonical status unverified",
+      "verifiedCanonical": false,
+      "gammaLastSeenUpdated": "2026-09-08T12:44:07.615Z"
     },
     {
       "localPath": "realistic-film-budget.html",
@@ -36,14 +38,16 @@
       "localPath": "screenplay-baby.html",
       "gammaId": "5zupllwsm8jzxw5",
       "gammaUrl": "https://gamma.app/docs/First-Screenplay-Writing-5zupllwsm8jzxw5",
-      "status": "English original candidate confirmed by Gamma full-text search; multiple English versions exist, canonical edition not yet established",
-      "verifiedCanonical": false
+      "status": "Latest matching English-title Gamma search result; candidate only, canonical status unverified",
+      "verifiedCanonical": false,
+      "gammaLastSeenUpdated": "2026-09-07T15:22:30.269Z"
     }
   ],
   "retrievalAssessment": {
     "authenticatedGammaConnector": "Gamma full-text search located the expected English titles and English article text for all five mapped IDs. Earlier read_gamma responses appeared mismatched for three IDs; reconcile retrieval before automation.",
     "publicHTML": "Gamma returned HTTP 403 in connected sandbox; direct unauthenticated scraping is not viable.",
     "automatedAPI": "Gamma documents authenticated REST read/export endpoints, but no scheduled API credential or GitHub Actions secret has been verified. Do not activate synchronization until authenticated retrieval, content conversion and safe commit validation are tested.",
-    "translation": "All five existing local English HTML pages load js/automatic-translation.js; no cross-origin iframe translation is assumed."
+    "translation": "All five existing local English HTML pages load js/automatic-translation.js; no cross-origin iframe translation is assumed.",
+    "candidateEvidence": "Full-text Gamma search on 2026-10-21 confirms each of the three mapped candidate IDs is the most recently updated result among matching English-title versions. Do not treat recency alone as canonical approval."
   }
 }
