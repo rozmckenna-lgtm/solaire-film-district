@@ -1,0 +1,97 @@
+[INSTRUCTION: Below is the HTML content of a Gamma presentation. Present the FULL human-readable content of every card to the user — including all text, images, videos, embeds, charts, tables, diagrams, and other visuals. Do NOT show raw HTML or markup. Do NOT summarize unless the user explicitly asks for a summary. Format for easy reading with headings, bullet points, and spacing.]
+
+Title: How Do You Create a Realistic Film Budget? | Solaire PitchUp Creator Centre
+
+=== Page 1: How Do You Create a Realistic Film Budget? | Solaire PitchUp Creator Centre (main) ===
+<HEAD>
+  <title>How Do You Create a Realistic Film Budget? | Solaire PitchUp Creator Centre</title>
+  <theme id="g_qx9xrjswcu0dvkq" />
+  <format>document</format>
+  <style>/* Tenure: one sans family, weight-only hierarchy, one accent, hairline rules. Print-first. */
+.gml-card { font-kerning: normal; }
+.gml-card p { widows: 2; orphans: 2; }
+
+/* Letterhead tick: the short accent rule under name + title line. */
+.tick.gml-divider { width: 28pt; }
+.tick.gml-divider .gml-divider__rule { width: 100%; border-radius: 0; background-color: var(--accent-color); }
+
+/* Contact strip: middot-separated plain text, tabular digits. */
+.meta { font-variant-numeric: tabular-nums; }
+
+/* Section seam: one full-width hairline, squared ends. */
+.rule.gml-divider .gml-divider__rule { border-radius: 0; }
+
+/* Title line under the name: the role, one quiet line in the text face. */
+.title-line { text-wrap: balance; }
+
+/* Experience rail: a solid accent dot heads each entry in the inline marker gutter,
+   and one hairline runs down the gutter from dot to dot (not after the last entry). */
+.rail { --marker-color: var(--accent-color); --marker-gap: 12pt; --marker-inline-size: 10pt; }
+.rail .gml-grid-cell[data-marker="bullet"] { position: relative; }
+.rail .gml-grid-cell[data-marker="bullet"]::before {
+  content: ""; position: absolute; z-index: 0;
+  left: calc(var(--marker-inline-size) / 2 - 0.25pt); width: 0.5pt;
+  top: 13pt; bottom: -16pt;
+  background-color: var(--neutral-border-color);
+}
+.rail .gml-grid-cell-frame:last-child .gml-grid-cell[data-marker="bullet"]::before { display: none; }
+.rail li.gml-bullet::marker { color: var(--palette-muted); }
+/* In a rail heading, the role after the company reads regular. */
+.rail .gml-heading span { font-weight: var(--body-font-weight); }
+
+/* Quiet chips: pale tint, no border, sentence-case chip text. */
+.chips .gml-label-group { gap: 5pt; }
+.chips .gml-label[data-variant="solid"] { --label-fill: var(--palette-chip); --label-text: var(--palette-ink); border: none; border-radius: 999px; }
+
+/* Group label above a chip set or a stacked list: tighter tracking than a section label. */
+.group.gml-paragraph[data-role="eyebrow"] { letter-spacing: 0.1em; }
+
+/* Leading date gutter: the caption's line box matches the entry's first line, so the date
+   shares that line's baseline instead of riding high. */
+.gutter .gml-paragraph { line-height: 1.95; }
+
+/* Accent figure: tabular numerals, tight to its caption. */
+.metric { font-variant-numeric: tabular-nums; }
+
+/* Rows-only ledger: horizontal hairlines, muted tabular year column. */
+.ledger .gml-table__table { border: none; }
+.ledger { --table-cell-padding-block: 7pt; font-variant-numeric: tabular-nums; }
+/* Deck-wide table voice: the first column sits on the page's left text edge, flush with the
+   section labels and ledgers around it (tables take no author class, so this is page-wide). */
+.gml-table__cell[data-col='0'] { padding-inline-start: 0; }
+
+/* Calm landing: the last block of a page. */
+.landing { font-variant-numeric: tabular-nums; }
+
+/* Letter text: even rag, no orphaned last words. */
+.measure p, .measure.gml-paragraph { text-wrap: pretty; }
+
+/* Voiced quotation: a recommendation in the referee's words, never italic display. */
+.quote { text-wrap: pretty; }
+
+/* Numbered ledgers (contents, ranked achievements): one numbering voice deck-wide —
+   bare muted leading-zero numerals in a type-relative hanging gutter, tabular so every
+   row's text shares one edge. */
+.toc, .ranked { --marker-inline-size: 1.85em; --marker-gap: 1em; --marker-color: var(--body-color-muted); }
+.toc .gml-grid-cell__marker, .ranked .gml-grid-cell__marker { font-variant-numeric: tabular-nums; }
+
+/* Phase band: muted numerals over a neutral hairline (the accent stays on the candidate),
+   with the phase name clearly hung under its rule. */
+.phases { --marker-color: var(--body-color-muted); --marker-rule-color: var(--neutral-border-color); --marker-rule-thickness: 0.75pt; }
+.phases .gml-grid-cell { --marker-gap: 12pt; }
+/* In the narrow phase columns, wrapped bullets stay separable: item gap well above line leading. */
+.phases .gml-grid-cell__content { --list-gap: 9pt; }
+
+/* Evidence entries: description, figure, and caption group tightly inside each ruled entry. */
+.evidence .gml-grid-cell__content { --block-gap: 5pt; --subheading-gap-below: 4pt; }
+
+/* People list: name, role, relationship, and contact stack as one tight record per ruled row. */
+.roster .gml-grid-cell__content { --block-gap: 4pt; --subheading-gap-below: 4pt; }</style>
+  <page-setup>
+    <card-dimensions>letter_portrait</card-dimensions>
+    <vertical-align>start</vertical-align>
+    <scale-content-to-fit>true</scale-content-to-fit>
+    <animations-enabled>false</animations-enabled>
+  </page-setup>
+</HEAD>
+<div><section id="nlfcsbihg1smrvk" image-layout="blank"><grid id="0wGqOUm6EL" spacing="none"><grid-item padding="36pt 42pt" class="measure evidence" id="aore2YjMWK"><h1 font-size="22pt"><span text-color="accent">How Do You Create a Realistic Film Budget?</span></h1><p role="eyebrow">SOLAIRE PITCHUP CREATOR CENTRE</p><p style="line-height: 1.35" font-size="11pt"><b>Quick Answer:</b> A realistic film budget begins with a production plan, current labour rates and supplier costs. Estimate the people, days, locations, equipment and post-production required, then record each significant assumption and source. AI can organise and calculate a preliminary budget, but unreliable inputs produce unreliable figures. Sensitive scripts require appropriate privacy precautions.</p><hr class="tick" horizontalAlign="left" width="xs" thickness="md" color="accent"><h2 font-size="15pt">Do you need a budget before finding a producer?</h2><p style="line-height: 1.35" font-size="11pt">You may need an indicative range, even at development stage. A screenwriter seeking an option agreement is rarely expected to commission a complete production budget. However, knowing whether a project might cost £250,000 or £5 million helps identify appropriate producers, funding routes and partners.</p><p style="line-height: 1.35" font-size="11pt">Label the figure accurately: creator-supplied estimate, source-based indicative estimate, or professionally reviewed budget. State who prepared it and when. A precise number without supporting assumptions offers false reassurance.</p><hr class="rule" thickness="sm" color="neutral-border"><h2 font-size="15pt">What determines the cost of a film?</h2><p style="line-height: 1.35" font-size="11pt">The production requirements and filming territory determine cost. A contemporary drama with four main actors and two locations is different from a period film requiring constructed sets, crowds, elaborate costumes and visual effects.</p><p style="line-height: 1.35" font-size="11pt">Prepare a brief identifying country, filming base, expected shooting days, principal cast, approximate crew, locations, equipment, travel, construction, costumes and post-production. A script breakdown describes what must be filmed; a shooting schedule estimates when and with which resources.</p><p style="line-height: 1.35" font-size="11pt">Where the project is still seeking a producer, many details will remain provisional. Declare those uncertainties instead of disguising them.</p></grid-item></grid></section><section id="4flclt7201gd764" image-layout="blank"><grid id="JUC4bci1fB" spacing="none"><grid-item padding="36pt 42pt" class="measure evidence" id="3tdNtF7bnC"><h2 font-size="17pt"><span text-color="accent">Where can you find reliable film crew rates?</span></h2><hr class="tick" horizontalAlign="left" width="xs" thickness="md" color="accent"><p style="line-height: 1.35" font-size="11pt">Start with applicable national agreements and current departmental rates. For France, consult the <a href="https://www.legifrance.gouv.fr/conv_coll/id/KALICONT000028059838">film production collective agreement and salary amendments on Légifrance</a>. For Britain, check <a href="https://bectu.org.uk/get-involved-in-the-union/ratecards/">Bectu departmental rate cards</a>, remembering that recommended rates are not necessarily binding legal minima. In the United States, relevant <a href="https://www.sagaftra.org/production-center/contract/815/rate-sheet/document">SAG-AFTRA rate sheets</a> and other guild agreements may apply.</p><p style="line-height: 1.35" font-size="11pt">Verify the agreement's effective date, production type, crew grade, budget band and contracted hours. A daily wage seldom represents the entire cost: overtime, employer contributions, holiday provisions and allowances may be additional.</p><p style="line-height: 1.35" font-size="11pt">Request current supplier quotations for equipment, studios, vehicles, accommodation, locations and post-production. Record quotation dates, conditions and exclusions. Mark anything unquoted as an allowance.</p><hr class="rule" thickness="sm" color="neutral-border"><h2 font-size="15pt">How do you calculate a production budget?</h2><p style="line-height: 1.35" font-size="11pt">Calculate the quantity, duration and cost of each requirement, grouped into departments: cast, crew, equipment, locations, production design, costume, transport, catering, post-production, insurance, administration and delivery.</p><p style="line-height: 1.35" font-size="11pt">If equipment is quoted at €1,200 per week for three weeks, the base hire is €3,600. This is an arithmetic illustration, not a genuine supplier quotation. Transport, insurance or additional hire periods may increase the figure.</p><p style="line-height: 1.35" font-size="11pt">Check for duplication: equipment hired for the entire shoot must not be charged again for each scene. Include an appropriate contingency for unforeseen costs, reflecting the project's risks and funder requirements. A credible range can show how alternative locations or shooting schedules affect the total.</p></grid-item></grid></section><section id="9jz7oax45g48rq9" image-layout="blank"><grid id="eXPWJYLocn" spacing="none"><grid-item padding="36pt 42pt" class="measure evidence" id="BPDfcx4qLW"><h2 font-size="17pt"><span text-color="accent">Can AI create a reliable film budget?</span></h2><hr class="tick" horizontalAlign="left" width="xs" thickness="md" color="accent"><p style="line-height: 1.35" font-size="11pt">AI can help assemble a preliminary budget when every material figure is traceable. It can arrange departments, perform calculations, compare realistic scenarios and identify missing costs. Require dates and links for published rates, and explicit descriptions of supplier assumptions.</p><p style="line-height: 1.35" font-size="11pt">AI can also confidently invent rates, misunderstand an agreement or produce precise totals from an unrealistic schedule. Check its arithmetic and original references. A qualified line producer or production accountant should review a budget before it supports substantial financing or production commitments.</p><hr class="rule" thickness="sm" color="neutral-border"><h2 font-size="15pt">How can you protect your intellectual property when using AI?</h2><p style="line-height: 1.35" font-size="11pt">Start with a short, creator-approved production brief rather than uploading a complete unpublished screenplay. Describe practical production needs without revealing unnecessary story details, confidential contracts or personally identifiable information.</p><p style="line-height: 1.35" font-size="11pt">Check the provider's current privacy and data controls. Where available, turn off the use of conversations and uploads for model training. For example, <a href="https://help.openai.com/en/articles/7730893-data-usage-for-openai-models">ChatGPT's Data Controls</a> explain its training setting. You can also write to the AI supplier asking for confirmation of training use, retention periods, human access, third-party processing, deletion and contractual rights over uploads.</p><p style="line-height: 1.35" font-size="11pt"><b>A training opt-out does not necessarily mean zero retention or complete confidentiality.</b> Obtain appropriate permission before processing another creator's material and check the supplier's terms for the exact service you use.</p></grid-item></grid></section><section id="6jmg2oidn0elh49" image-layout="blank"><grid id="p1VYi2k4qB" spacing="none"><grid-item padding="36pt 42pt" class="measure evidence" id="h7eNagci14"><h2 font-size="15pt"><span text-color="accent">What should you show a producer or investor?</span></h2><hr class="tick" horizontalAlign="left" width="xs" thickness="md" color="accent"><p style="line-height: 1.35" font-size="11pt">Provide a total estimated budget or credible range, filming territory, key assumptions, preparation date and verification status. Keep total production cost, finance actually secured and the remaining financing gap separate. An anticipated grant or potential tax rebate should not be represented as confirmed cash; eligibility and payment timing may still be uncertain.</p><hr class="rule" thickness="sm" color="neutral-border"><h2 font-size="15pt">When should a film budget be updated?</h2><p style="line-height: 1.35" font-size="11pt">Review it whenever the production plan, crew agreements or supplier quotations change. Rates should be researched for each project, with an annual review of master references. An inflation adjustment cannot replace checking current contractual and supplier costs.</p><p style="line-height: 1.35" font-size="11pt"><b>First practical step:</b> prepare a one-page production brief, identify the ten likely largest expenses and mark which have a verified source. A producer can then assess the major assumptions and help develop the next version.</p><p style="line-height: 1.35" font-size="11pt"><b>Read next:</b> <a href="https://gamma.app/docs/Financing-Your-Film-I-Have-a-Screenplay-What-Does-It-Need-Before--bs93fgoywuhnt3x">Financing Your Film</a> | <a href="https://gamma.app/docs/Grants-vs-Equity-vs-Loans-What-Kind-of-Film-Money-Are-You-Actuall-0g6pfnhg98iqmvn">Grants vs Equity vs Loans</a>.</p><p role="caption">Written by Rosalind McKenna for Solaire PitchUp Creator Centre</p><p role="caption">Last updated: October 2026</p></grid-item></grid></section></div>
