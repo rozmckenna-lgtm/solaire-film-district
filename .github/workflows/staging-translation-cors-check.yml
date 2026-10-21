@@ -25,11 +25,12 @@ jobs:
           test "$code" = 204
           rejected=$(curl -sS -o /dev/null -w '%{http_code}' -X OPTIONS "$endpoint" -H 'Origin: https://untrusted.example' -H 'Access-Control-Request-Method: POST')
           test "$rejected" = 403
-          grep -q '/translate-website-staging' preview/automatic-translation.js
+          grep -q 'translate-website-staging' preview/automatic-translation.js
+          grep -q 'isProduction ? "translate-website" : "translate-website-staging"' preview/automatic-translation.js
           {
             echo 'PASS staging OPTIONS 204 and exact allowed origin'
             echo 'PASS untrusted origin rejected 403'
-            echo 'PASS preview translation JS targets isolated staging function'
+            echo 'PASS preview translation JS routes staging and production to separate functions'
             echo 'NO paid Google translation request performed'
           } > preview/verification/staging-translation-cors.log
           cat preview/verification/staging-translation-cors.log
