@@ -104,3 +104,41 @@ body{background:#130b12 url('https://media.base44.com/images/public/6ad768462ea5
 img,video{max-width:100%}
 @media(max-width:920px){.topbar{flex-wrap:wrap;justify-content:center;gap:14px}.nav{order:3;width:100%;gap:12px 20px}.account{margin-left:auto}}
 @media(max-width:560px){.topbar{padding:14px 18px}.brand{max-width:58%}.brand-logo{max-height:48px;width:auto}.account{font-size:10px;padding:9px}.nav{justify-content:flex-start}.nav a{font-size:10px}.hero{min-height:490px}.hero-inner{padding:65px 0 75px}}
+
+/* Film District sidebar: inspired by PitchUp's navigation, without changing the app. */
+:root{--district-sidebar-width:258px}
+.district-sidebar{position:fixed;inset:0 auto 0 0;width:var(--district-sidebar-width);z-index:30;overflow-y:auto;overscroll-behavior:contain;background:linear-gradient(155deg,#23131d 0%,#130d14 50%,#0e0b10 100%);border-right:1px solid #a98a5d70;box-shadow:12px 0 40px #0004;display:flex;flex-direction:column}
+.sidebar-brand{display:block;padding:27px 21px 23px;border-bottom:1px solid #b8955b55}
+.sidebar-brand img{display:block;width:195px;max-width:100%;height:auto}
+.sidebar-nav{display:flex;flex-direction:column;gap:4px;padding:22px 11px}
+.sidebar-nav a{display:block;padding:11px 14px;border-radius:7px;border-left:3px solid transparent;color:#d5c9c2;font-size:13px;letter-spacing:.02em;line-height:1.4}
+.sidebar-nav a:hover,.sidebar-nav a:focus-visible{background:#392130;color:#f6e5c5}
+.sidebar-nav a.active{background:#332332;border-left-color:var(--gold);color:var(--gold)}
+.sidebar-account{display:block;margin:auto 16px 24px;padding:12px 10px;border:1px solid #b8955b;color:var(--gold);font-size:12px;text-align:center}
+.district-content{margin-left:var(--district-sidebar-width);min-width:0}
+.district-content .topbar{min-width:0}
+.sidebar-toggle,.sidebar-backdrop{display:none}
+@media(min-width:1101px){
+  .district-content .topbar .brand{display:none}
+  .district-content .topbar{justify-content:flex-end;min-height:70px;padding:12px 30px}
+  .district-content .topbar .nav{gap:clamp(12px,1.3vw,22px)}
+  .district-content .hero-inner{width:min(1100px,88%)}
+  .district-content .hero h1{font-size:clamp(53px,5.5vw,90px)}
+  .district-content .feature h2{font-size:clamp(26px,2.4vw,38px)}
+}
+@media(max-width:1100px){
+  .district-sidebar{transform:translateX(-105%);transition:transform .22s ease;z-index:42;width:min(290px,84vw)}
+  .sidebar-toggle{display:flex;position:fixed;top:12px;left:12px;z-index:44;align-items:center;gap:8px;padding:10px 13px;background:#25131eea;border:1px solid #c6a46d;border-radius:6px;color:var(--gold);font:600 12px Inter,Arial,sans-serif;cursor:pointer}
+  .sidebar-backdrop{display:block;position:fixed;inset:0;background:#08050abb;opacity:0;visibility:hidden;z-index:41;transition:opacity .22s,visibility .22s}
+  .sidebar-open .district-sidebar{transform:translateX(0)}
+  .sidebar-open .sidebar-backdrop{opacity:1;visibility:visible}
+  .district-content{margin-left:0}
+  .district-content .topbar{padding-left:110px}
+}
+@media(max-width:560px){
+  .sidebar-toggle{top:8px;left:8px;padding:8px 10px}
+  .district-content .topbar{padding-left:88px;justify-content:flex-end}
+  .district-content .topbar .brand{max-width:100%}
+  .district-content .topbar .brand-logo{max-width:155px}
+}
+@media(prefers-reduced-motion:reduce){.district-sidebar,.sidebar-backdrop{transition:none}}
