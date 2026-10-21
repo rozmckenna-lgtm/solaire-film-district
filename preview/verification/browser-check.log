@@ -30,5 +30,7 @@ PASS mobile john-malkovich.html
 PASS mobile realistic-film-budget.html
 PASS mobile screenplay-baby.html
 PASS mobile thank-you.html
+PASS loi-mocked-submit-failure
+PASS loi-mocked-submit-success
 PASS arabic-translation-failure-direction
 PASS arabic-translation-success-direction
