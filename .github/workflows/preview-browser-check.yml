@@ -1,10 +1,5 @@
 name: Cinematic staging browser verification
 on:
-  push:
-    paths:
-      - 'preview/**'
-      - '!preview/verification/**'
-      - '.github/workflows/preview-browser-check.yml'
   workflow_dispatch:
 permissions:
   contents: write
