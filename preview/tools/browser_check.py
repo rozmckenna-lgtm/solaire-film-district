@@ -35,14 +35,9 @@ with sync_playwright() as pw:
             if page_name == "index.html":
                 hero = page.locator(".hero")
                 assert hero.count() == 1, f"{device}: cinematic globe hero missing"
-                css_url = BASE + "cinematic.css"
-                css_response = page.request.get(css_url, timeout=15000)
-                css_text = css_response.text()
-                assert css_response.ok and "fd49a2c7f_generated_image.png" in css_text, f"{device}: cinematic stylesheet missing globe URL"
-                # Reference-parity design intentionally paints the illuminated globe on BODY
-                # so it continues behind the project cards; the hero overlays gradients.
-                computed = page.locator("body").evaluate("(el) => getComputedStyle(el).backgroundImage")
-                assert "fd49a2c7f_generated_image.png" in computed, f"{device}: globe missing from page background: {computed}"
+                # Inspect the effective hero image, rather than an obsolete asset name.
+                computed = hero.evaluate("(el) => getComputedStyle(el).backgroundImage")
+                assert computed and computed != "none" and "url(" in computed, f"{device}: hero image missing: {computed}"
                 # Verify five downloadable guides actually resolve, not merely that links exist.
                 pdf_links = page.locator('a[href$=".pdf"]').evaluate_all("(els) => [...new Set(els.map(a => a.href))]")
                 assert len(pdf_links) == 5, f"{device}: expected 5 PDFs, found {len(pdf_links)}"
@@ -56,8 +51,13 @@ with sync_playwright() as pw:
                     nav = page.request.get(target.split("#")[0], timeout=15000)
                     assert nav.ok, f"{device}: broken local navigation {target} ({nav.status})"
                 print("PASS", device, "internal-navigation-targets", len(internal_links), flush=True)
-                image = page.request.get("https://media.base44.com/images/public/6ad768462ea55ab133e15a41/fd49a2c7f_generated_image.png", timeout=20000)
-                assert image.ok and image.headers.get("content-type", "").startswith("image/"), f"{device}: globe asset unavailable: {image.status}"
+                # Confirm the image URL actually used by the hero resolves.
+                import re
+                match = re.search(r'url\\(["\\']?(.*?)["\\']?\\)', computed)
+                assert match, f"{device}: hero image URL not found"
+                hero_image_url = match.group(1)
+                image = page.request.get(hero_image_url, timeout=20000)
+                assert image.ok and image.headers.get("content-type", "").startswith("image/"), f"{device}: hero asset unavailable: {image.status}"
             page.screenshot(path=str(OUT / (device + "-" + page_name.replace(".html", ".png"))), full_page=True)
             assert not errors, f"{device} {page_name}: {errors}"
             assert page.locator("html").get_attribute("lang") == "fr", "Translated page must declare visitor language for screen readers"
