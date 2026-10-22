@@ -6,7 +6,7 @@
       "status": 200,
       "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/index.html",
       "content_type": "text/html; charset=utf-8",
-      "bytes": 7020,
+      "bytes": 10363,
       "cinematic_html": true,
       "gamma_error": false
     },
@@ -15,14 +15,14 @@
       "status": 200,
       "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/cinematic.css",
       "content_type": "text/css; charset=utf-8",
-      "bytes": 13128
+      "bytes": 29538
     },
     {
       "path": "automatic-translation.js",
       "status": 200,
       "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/automatic-translation.js",
       "content_type": "application/javascript; charset=utf-8",
-      "bytes": 5729
+      "bytes": 9312
     },
     {
       "path": "creator-centre.html",
@@ -50,17 +50,12 @@
       "status": 200,
       "url": "https://rozmckenna-lgtm.github.io/solaire-film-district/preview/loi.html",
       "content_type": "text/html; charset=utf-8",
-      "bytes": 7375
+      "bytes": 9141
     }
   ],
   "all_ok": true,
-  "globe_asset": {
-    "url": "https://media.base44.com/images/public/6ad768462ea55ab133e15a41/fd49a2c7f_generated_image.png",
-    "status": 200,
-    "content_type": "image/png",
-    "png_signature": false,
-    "first_bytes_hex": "ffd8ffe000104a464946000101000001",
-    "jpeg_signature": true,
-    "valid_raster_image": true
+  "hero_asset_check": {
+    "source": "staging cinematic.css",
+    "error": "missing ), unterminated subpattern at position 5"
   }
 }
