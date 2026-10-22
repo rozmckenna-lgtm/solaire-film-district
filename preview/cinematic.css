@@ -294,3 +294,9 @@ body{color:var(--cream);font-family:Inter,Arial,sans-serif;font-weight:400}
 .hero-banner-subtitle{font-size:clamp(13px,1.7vw,26px)!important;letter-spacing:.2em!important}
 .hero .hero-inner{display:none!important}
 @media(max-width:750px){.hero{min-height:270px!important;background-position:57% center!important}.hero::before{width:63%;background:linear-gradient(90deg,#050506 0%,#050506 60%,#050506ed 80%,transparent 100%)}.hero-banner-brand{top:20%!important;left:3%!important;width:54%!important}.hero-banner-sun.actual-solaire-mark{width:42px!important;height:42px!important}.hero-banner-title{font-size:clamp(27px,6vw,43px)!important}.hero-banner-subtitle{font-size:clamp(11px,2.8vw,17px)!important}}
+
+/* Keep the sunrise over illuminated Europe visible, including if the PitchUp
+   banner host fails: the original cinematic globe is a second image layer. */
+.hero{background-color:#08080b!important;background-image:url("https://media.base44.com/images/public/6aad88e42bfa4632edae24bb/be2231eab_SolairePitchupbanner.png"),url("https://media.base44.com/images/public/6ad768462ea55ab133e15a41/fd49a2c7f_generated_image.png")!important;background-size:cover,cover!important;background-position:center center,center center!important;background-repeat:no-repeat!important}
+.hero::before{width:46%!important;background:linear-gradient(90deg,#050506 0%,#050506 69%,#050506d9 85%,transparent 100%)!important}
+@media(max-width:750px){.hero{background-position:55% center,55% center!important}.hero::before{width:58%!important}}
