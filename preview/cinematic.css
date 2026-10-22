@@ -301,3 +301,8 @@ body{background:#130b12!important}
 .hero{background-color:#08080b!important;background-image:url("https://media.base44.com/images/public/6aad88e42bfa4632edae24bb/be2231eab_SolairePitchupbanner.png")!important;background-size:cover!important;background-position:center center!important;background-repeat:no-repeat!important}
 .hero::before{width:46%!important;background:linear-gradient(90deg,#050506 0%,#050506 69%,#050506d9 85%,transparent 100%)!important}
 @media(max-width:750px){.hero{background-position:55% center!important}.hero::before{width:58%!important}}
+
+/* Remove the baked-in PitchUp lettering from the shared banner photograph.
+   The approved Film District HTML wordmark remains visible above this mask. */
+.hero::before{width:57%!important;background:linear-gradient(90deg,#050506 0%,#050506 79%,#050506f5 90%,transparent 100%)!important}
+@media(max-width:750px){.hero::before{width:70%!important;background:linear-gradient(90deg,#050506 0%,#050506 73%,#050506f5 89%,transparent 100%)!important}}
