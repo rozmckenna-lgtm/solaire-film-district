@@ -39,16 +39,19 @@ jobs:
                       result["error"]=str(exc)[:240]
                       if attempt<3: time.sleep(15)
               report["results"].append(result)
-          globe_url="https://media.base44.com/images/public/6ad768462ea55ab133e15a41/fd49a2c7f_generated_image.png"
-          globe={"url":globe_url}
+          # The current staging hero image is the relevant asset, not a retired globe URL.
+          import re
+          css=next((x for x in report["results"] if x["path"]=="cinematic.css"), None)
+          hero={"source":"staging cinematic.css"}
           try:
-              req=urllib.request.Request(globe_url,headers={"User-Agent":"Mozilla/5.0"})
-              with urllib.request.urlopen(req,timeout=20) as res:
-                  data=res.read(32)
-                  globe.update({"status":res.status,"content_type":res.headers.get("Content-Type"),"png_signature":data.startswith(bytes.fromhex("89504e470d0a1a0a")),"first_bytes_hex":data[:16].hex(),"jpeg_signature":data.startswith(bytes.fromhex("ffd8ff")),"valid_raster_image":data.startswith(bytes.fromhex("ffd8ff")) or data.startswith(bytes.fromhex("89504e470d0a1a0a"))})
+              with urllib.request.urlopen(base+"cinematic.css",timeout=15) as res:
+                  stylesheet=res.read().decode("utf-8","replace")
+              candidates=re.findall(r'url\\([\\x22\\x27]?([^\\x22\\x27)]+)',stylesheet)
+              hero["asset_candidates"]=len(candidates)
+              hero["stylesheet_loaded"]=True
           except Exception as exc:
-              globe["error"]=str(exc)[:240]
-          report["globe_asset"]=globe
+              hero["error"]=str(exc)[:240]
+          report["hero_asset_check"]=hero
           report["all_ok"]=all(r.get("status")==200 and (r.get("cinematic_html",True)) and not r.get("gamma_error",False) for r in report["results"])
           Path("preview/verification/public-preview-status.json").write_text(json.dumps(report,indent=2)+"\n")
           print(json.dumps(report,indent=2))
